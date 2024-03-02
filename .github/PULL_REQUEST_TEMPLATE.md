@@ -1,8 +1,3 @@
-# Angular App version
-
-- [ ] `angular-v17` - has no UI libraries
-- [ ] `angular-v17-AnguMAT` - has Angular Material
-- [ ] `angular-v17-PrimeNG` - has PrimeNG
 
 ## This PR Closes Issue 
 closes #
@@ -10,6 +5,7 @@ closes #
 ## Description
 
 ## What type of PR is this? (check all applicable)
+
 - [ ] 🅰️ Feature
 - [ ] 🐛 Bug Fix
 - [ ] 📝 Documentation Update
