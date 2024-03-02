@@ -33,7 +33,7 @@ Instead, we recommend using Discussions to ask support-related questions.
 
 ## Found a Bug?
 
-If you find a bug in the source code, you can help by [submitting an issue](#submitting-an-issue) to  [Angular-Headless-Hashnode](https://github.com/monacodelisa/Angular-Headless-Hashnode/issues).
+If you find a bug in the source code, you can help by [submitting an issue](#submitting-an-issue) to  [HashnodeNG](https://github.com/HashnodeNG/angular/issues).
 Even better, you can [submit a Pull Request](#submitting-a-pull-request-pr) with a fix.
 
 
@@ -60,20 +60,20 @@ To expedite bug fixes, a minimal reproduction of the issue is required. This con
 
 Providing a minimal reproduction is crucial for saving time, increasing the chances of a quick resolution, and ensuring that focus is given to the correct issue.
 
-You can file new issues by selecting from our [new issue templates](https://github.com/monacodelisa/angular-headless-hashnode/issues/new/choose) and filling out the issue template.
+You can file new issues by selecting from our [new issue templates](https://github.com/HashnodeNG/angular/issues/new/choose) and filling out the issue template.
 
 
 ### Submitting a Pull Request (PR)
 
 Before you submit your Pull Request (PR) consider the following guidelines:
 
-1. Search [GitHub](https://github.com/monacodelisa/angular-headless-hashnode/pulls) for an open or closed PR that relates to your submission.
+1. Search [GitHub](https://github.com/HashnodeNG/angular/pulls) for an open or closed PR that relates to your submission.
    You don't want to duplicate existing efforts.
 
 2. Be sure that an issue describes the problem you're fixing, or documents the design for the feature you'd like to add.
    Discussing the design upfront helps to ensure that we're ready to accept your work.
 
-3. [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the `monacodelisa/angular-headles-hashnopde` repo.
+3. [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the `HashnodeNG/angular` repo.
 
 4. In your forked repository, make your changes in a new git branch:
 
@@ -101,7 +101,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
     git push origin my-fix-branch
     ```
 
-10. In GitHub, send a pull request to `angular-headless-hashnode:develop`.
+10. In GitHub, send a pull request to `HashnodeNG/angular:develop`.
 
 ### Reviewing a Pull Request
 
@@ -240,7 +240,7 @@ chore: prepare for version 1.0.0 release
 revert: revert changes from commit abc123
 ```
 
-## Mandatory Compliance with [Coding Rules](#coding-rules) and [Commit Message Guidelines](#commit-message-guidelines) for PR Merges
+### Mandatory Compliance with [Coding Rules](#coding-rules) and [Commit Message Guidelines](#commit-message-guidelines) for PR Merges
 
 Kindly ensure that all pull requests strictly adhere to our Coding Rules and Commit Message Guidelines. Non-compliant PRs must be adjusted prior to acceptance.
 
