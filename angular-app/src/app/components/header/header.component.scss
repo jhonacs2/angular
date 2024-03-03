@@ -35,16 +35,10 @@
       justify-content: center;
       margin: 0.8rem 0 0.5rem;
 
-      a {
-        margin: 0 0.4rem;
-
-        i {
-          height: 1.1rem;
-          width: 1.1rem;
-
-          &:before {
-            font-size: 1.1rem;
-          }
+      .social-link {
+        display: flex;
+        a {
+          margin: 0 0.4rem;
         }
       }
     }
