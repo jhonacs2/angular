@@ -3,4 +3,4 @@ Use this version of
 which allows you to connect your Hashnode Blog to
 # ![angular logo](/angular.png) Angular 
 
-without using any UI libraries
+without any UI libraries
