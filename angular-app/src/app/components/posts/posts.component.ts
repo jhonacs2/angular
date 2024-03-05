@@ -18,7 +18,7 @@ export class PostsComponent implements OnInit {
   posts!: Post[];
   blogService: BlogService = inject(BlogService);
   paginationInfo: PageInfo = { hasNextPage: true, endCursor: '' };
-  isHiddenLoadMore: boolean = false;
+  isHiddenLoadMore: boolean = true;
   isActiveInfiniteScroll: boolean = false;
 
   private router = inject(Router);
@@ -46,6 +46,7 @@ export class PostsComponent implements OnInit {
   private loadPosts(): void {
     this.blogService.getPosts(this.blogURL, 10, this.paginationInfo.endCursor).subscribe(blogPaginationInfo => {
       this.paginationInfo = blogPaginationInfo.pagination;
+      this.isHiddenLoadMore = !blogPaginationInfo.pagination.hasNextPage;
       this.posts = blogPaginationInfo.posts;
     });
   }

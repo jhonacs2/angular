@@ -18,7 +18,7 @@ export class SeriesComponent implements OnInit {
   blogService: BlogService = inject(BlogService);
   paginationInfo: PageInfo = { hasNextPage: true, endCursor: '' };
   postsInSeries: Post[] = [];
-  isHiddenLoadMore: boolean = false;
+  isHiddenLoadMore: boolean = true;
   isActiveInfiniteScroll: boolean = false;
   route: ActivatedRoute = inject(ActivatedRoute);
   slug: string = '';
@@ -40,7 +40,7 @@ export class SeriesComponent implements OnInit {
   loadMorePosts():void {
     if (!this.paginationInfo.hasNextPage) return;
     this.isHiddenLoadMore = true;
-    this.blogService.getPosts(10, this.paginationInfo.endCursor).pipe(
+    this.blogService.getPosts(this.blogURL, 10, this.paginationInfo.endCursor).pipe(
     ).subscribe(newPosts => {
       this.isActiveInfiniteScroll = true;
       this.paginationInfo = newPosts.pagination;
@@ -51,6 +51,7 @@ export class SeriesComponent implements OnInit {
   private getPostsInSeries():void{
     this.blogService.getPostsInSeries(this.blogURL, this.slug).subscribe(blogInfo => {
       this.paginationInfo = blogInfo.pagination;
+      this.isHiddenLoadMore = !blogInfo.pagination.hasNextPage;
       this.postsInSeries = blogInfo.posts;
     })
   }
