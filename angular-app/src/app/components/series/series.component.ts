@@ -17,8 +17,9 @@ export class SeriesComponent implements OnInit {
   slug: string = "";
   postsInSeries$!: Observable<Post[]>;
   blogService: BlogService = inject(BlogService);
-  private router = inject(Router);
 	route: ActivatedRoute = inject(ActivatedRoute);
+
+  private router = inject(Router);
 
 	ngOnInit(): void {
 		this.postsInSeries$ = this.route.params.pipe(

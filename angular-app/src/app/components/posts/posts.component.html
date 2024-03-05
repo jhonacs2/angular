@@ -11,4 +11,10 @@
       </a>
     }
   </div>
+
+  @if (paginationInfo.hasNextPage && !isHiddenLoadMore){
+    <div class="load-more-posts">
+      <button (click)="loadMorePosts()" >Load more <i class="fa-solid fa-chevron-down"></i></button>
+    </div>
+  }
 </div>

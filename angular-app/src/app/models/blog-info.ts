@@ -1,3 +1,5 @@
+import { Post } from './post';
+
 export interface BlogInfo {
   id: string;
   title: string;
@@ -20,3 +22,13 @@ export type BlogLinks = {
   linkedin: string;
   mastodon: string;
 };
+
+export interface BlogPaginationInfo {
+  posts: Post[];
+  pagination: PageInfo;
+}
+
+export interface PageInfo {
+  hasNextPage: boolean;
+  endCursor: string;
+}

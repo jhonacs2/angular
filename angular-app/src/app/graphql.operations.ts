@@ -49,31 +49,37 @@ query Publication {
 }
 `;
 
-export const GET_POSTS = gql`
-query Publication {
-  publication(host: "${BLOG_HOST}") {
-    id,
-    isTeam,
-    title,
-    posts(first: 10) {
-      edges {
-        node {
-          id,
-          slug,
-          coverImage {
-            url
+export function GET_POSTS(first:number, after:string){
+  return gql`
+    query Publication {
+      publication(host: "${BLOG_HOST}") {
+        id,
+        isTeam,
+        title,
+        posts(first: ${first},after:"${after}") {
+          edges {
+            node {
+              id,
+              slug,
+              coverImage {
+                url
+              }
+              title,
+              brief,
+              content {
+                html
+              }
+            }
           }
-          title,
-          brief,
-          content {
-            html
+          pageInfo {
+            endCursor,
+            hasNextPage
           }
         }
       }
     }
-  }
+  `
 }
-`;
 
 export const GET_SERIES_LIST = gql`
 query Publication {
