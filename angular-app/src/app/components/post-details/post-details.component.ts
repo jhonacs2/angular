@@ -28,6 +28,7 @@ import { BlogInfo } from '../../models/blog-info';
 })
 export class PostDetailsComponent implements OnInit, OnDestroy {
   sidenavOpen: boolean = false;
+  blogURL!: string;
   blogInfo!: BlogInfo;
   blogName: string = '';
   post$!: Observable<Post>;
@@ -39,13 +40,14 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
   @Input({ required: true }) slug!: string;
 
   ngOnInit(): void {
+    this.blogURL = this.blogService.getBlogURL();
     this.querySubscription = this.blogService
-    .getBlogInfo()
+    .getBlogInfo(this.blogURL)
     .subscribe((data) => {
       this.blogInfo = data;
       this.blogName = this.blogInfo.title;
     });
-    this.post$ = this.blogService.getSinglePost(this.slug);
+    this.post$ = this.blogService.getSinglePost(this.blogURL, this.slug);
   }
 
   toggleTheme(): void {

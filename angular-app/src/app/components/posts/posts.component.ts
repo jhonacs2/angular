@@ -14,6 +14,7 @@ import { InfiniteScrollDirective } from '../../directives/infinite-scroll.direct
   styleUrl: './posts.component.scss',
 })
 export class PostsComponent implements OnInit {
+  blogURL!: string;
   posts!: Post[];
   blogService: BlogService = inject(BlogService);
   paginationInfo: PageInfo = { hasNextPage: true, endCursor: '' };
@@ -23,6 +24,7 @@ export class PostsComponent implements OnInit {
   private router = inject(Router);
 
   ngOnInit() {
+    this.blogURL = this.blogService.getBlogURL();
     this.loadPosts();
   }
 
@@ -33,7 +35,7 @@ export class PostsComponent implements OnInit {
   loadMorePosts(): void {
     if (!this.paginationInfo.hasNextPage) return;
     this.isHiddenLoadMore = true;
-    this.blogService.getPosts(10, this.paginationInfo.endCursor).pipe(
+    this.blogService.getPosts(this.blogURL, 10, this.paginationInfo.endCursor).pipe(
     ).subscribe(newPosts => {
       this.isActiveInfiniteScroll = true;
       this.paginationInfo = newPosts.pagination;
@@ -42,7 +44,7 @@ export class PostsComponent implements OnInit {
   }
 
   private loadPosts(): void {
-    this.blogService.getPosts(10, this.paginationInfo.endCursor).subscribe(blogPaginationInfo => {
+    this.blogService.getPosts(this.blogURL, 10, this.paginationInfo.endCursor).subscribe(blogPaginationInfo => {
       this.paginationInfo = blogPaginationInfo.pagination;
       this.posts = blogPaginationInfo.posts;
     });

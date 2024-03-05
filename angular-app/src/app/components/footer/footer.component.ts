@@ -11,6 +11,7 @@ import { BlogInfo } from '../../models/blog-info';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent implements OnInit, OnDestroy {
+  blogURL!: string;
   blogInfo!: BlogInfo;
   blogName = '';
   date = new Date().getFullYear();
@@ -19,7 +20,8 @@ export class FooterComponent implements OnInit, OnDestroy {
   private querySubscription?: Subscription;
 
   ngOnInit(): void {
-    this.querySubscription = this.blogService.getBlogInfo().subscribe((data) => {
+    this.blogURL = this.blogService.getBlogURL();
+    this.querySubscription = this.blogService.getBlogInfo(this.blogURL).subscribe((data) => {
       this.blogInfo = data;
       this.blogName = this.blogInfo.title;
     });

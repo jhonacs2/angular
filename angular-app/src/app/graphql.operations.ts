@@ -1,10 +1,8 @@
 import { gql } from "apollo-angular";
 
-export const BLOG_HOST = "hashnode.anguhashblog.com";
-
 export const GET_BLOG_INFO = gql`
-query Publication {
-  publication(host: "${BLOG_HOST}") {
+query Publication ($host: String!) {
+  publication(host: $host) {
     id
     title
     isTeam
@@ -27,8 +25,8 @@ query Publication {
 `;
 
 export const GET_AUTHOR_INFO = gql`
-query Publication {
-  publication(host: "${BLOG_HOST}") {
+query Publication ($host: String!) {
+  publication(host: $host) {
     author {
       id
       username
@@ -51,8 +49,8 @@ query Publication {
 
 export const GET_POSTS=
    gql`
-    query Publication ($first: Int!, $after: String!){
-      publication(host: "${BLOG_HOST}") {
+    query Publication ($host: String!, $first: Int!, $after: String!){
+      publication(host: $host) {
         id,
         isTeam,
         title,
@@ -81,8 +79,8 @@ export const GET_POSTS=
   `;
 
 export const GET_SERIES_LIST = gql`
-query Publication {
-  publication(host: "${BLOG_HOST}") {
+query Publication ($host: String!) {
+  publication(host: $host) {
     id,
     title,
     seriesList(first:10) {
@@ -99,8 +97,8 @@ query Publication {
 `;
 
 export const GET_POSTS_IN_SERIES = gql`
-query Publication ($slug: String!, $after: String!) {
-  publication(host: "${BLOG_HOST}") {
+query Publication ($host: String!,$slug: String!, $after: String!) {
+  publication(host: $host) {
     id,
     isTeam ,
     title,
@@ -127,8 +125,8 @@ query Publication ($slug: String!, $after: String!) {
 `;
 
 export const GET_SINGLE_POST = gql`
-query SinglePost($slug: String!) {
-  publication(host: "${BLOG_HOST}") {
+query SinglePost($host: String!, $slug: String!) {
+  publication(host: $host) {
     post(slug: $slug) {
       id,
       slug,

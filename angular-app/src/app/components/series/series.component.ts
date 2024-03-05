@@ -14,6 +14,7 @@ import { InfiniteScrollDirective } from '../../directives/infinite-scroll.direct
   styleUrl: './series.component.scss',
 })
 export class SeriesComponent implements OnInit {
+  blogURL!: string;
   blogService: BlogService = inject(BlogService);
   paginationInfo: PageInfo = { hasNextPage: true, endCursor: '' };
   postsInSeries: Post[] = [];
@@ -25,6 +26,7 @@ export class SeriesComponent implements OnInit {
   private router = inject(Router);
 
   ngOnInit(): void {
+    this.blogURL = this.blogService.getBlogURL();
     this.route.params.subscribe(params => {
       this.slug = params['slug'];
       this.getPostsInSeries();
@@ -47,7 +49,7 @@ export class SeriesComponent implements OnInit {
   }
 
   private getPostsInSeries():void{
-    this.blogService.getPostsInSeries(this.slug).subscribe(blogInfo => {
+    this.blogService.getPostsInSeries(this.blogURL, this.slug).subscribe(blogInfo => {
       this.paginationInfo = blogInfo.pagination;
       this.postsInSeries = blogInfo.posts;
     })
