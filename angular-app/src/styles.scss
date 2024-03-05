@@ -181,6 +181,14 @@ article {
   .toolbar,
   footer {
     background-color: #dcdcdc;
+
+    .controls {
+      .theme-control {
+        span {
+          color: #656565;
+        }
+      }
+    }
   }
 
   button {
