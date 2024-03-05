@@ -1,31 +1,29 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
 import { BlogService } from '../../services/blog.service';
 import { Router, RouterLink } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { Post } from '../../models/post';
 import { PageInfo } from '../../models/blog-info';
+import { InfiniteScrollDirective } from '../../directives/infinite-scroll.directive';
 
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [RouterLink, AsyncPipe],
+  imports: [RouterLink, AsyncPipe, InfiniteScrollDirective],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
 })
 export class PostsComponent implements OnInit {
-  posts$!: Observable<Post[]>;
+  posts!: Post[];
   blogService: BlogService = inject(BlogService);
-  paginationInfo: PageInfo = { hasNextPage: false, endCursor: '' };
+  paginationInfo: PageInfo = { hasNextPage: true, endCursor: '' };
   isHiddenLoadMore: boolean = false;
+  isActiveInfiniteScroll: boolean = false;
 
   private router = inject(Router);
 
   ngOnInit() {
-    this.posts$ = this.blogService.getPosts().pipe(
-      tap(blogInfo => this.paginationInfo = blogInfo.pagination),
-      map(blogInfo => blogInfo.posts),
-    );
+    this.loadPosts();
   }
 
   navigateToPost(slug: string) {
@@ -36,10 +34,17 @@ export class PostsComponent implements OnInit {
     if (!this.paginationInfo.hasNextPage) return;
     this.isHiddenLoadMore = true;
     this.blogService.getPosts(10, this.paginationInfo.endCursor).pipe(
-      tap(blogInfo => this.paginationInfo = blogInfo.pagination),
-      map(blogInfo => blogInfo.posts)
     ).subscribe(newPosts => {
-      this.posts$ = this.posts$.pipe(map(posts => [...posts, ...newPosts]));
+      this.isActiveInfiniteScroll = true;
+      this.paginationInfo = newPosts.pagination;
+      this.posts = this.posts.concat(newPosts.posts);
+    });
+  }
+
+  private loadPosts(): void {
+    this.blogService.getPosts(10, this.paginationInfo.endCursor).subscribe(blogPaginationInfo => {
+      this.paginationInfo = blogPaginationInfo.pagination;
+      this.posts = blogPaginationInfo.posts;
     });
   }
 }
