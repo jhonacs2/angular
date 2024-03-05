@@ -28,11 +28,10 @@ export class InfiniteScrollDirective implements OnDestroy {
       takeUntil(this.unsubscribe))
       .subscribe(() => {
         let percentageBeforeEnd = this.calculatePositionScroll();
-
-        if (!isActivePercentageBeforeEnd && percentageBeforeEnd <= 20) {
+        if (!isActivePercentageBeforeEnd && percentageBeforeEnd <= this.infiniteScrollDistance) {
           isActivePercentageBeforeEnd = true;
           this.scrolled.emit();
-        } else if (percentageBeforeEnd >= 20) {
+        } else if (percentageBeforeEnd >= this.infiniteScrollDistance) {
           isActivePercentageBeforeEnd = false;
         }
       });
