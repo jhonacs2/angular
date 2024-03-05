@@ -3,22 +3,26 @@
   <div class="close">
     <span class="material-symbols-outlined close-btn" (click)="modalService.showSettingsDialog=false">
       close
-      </span>
+    </span>
   </div>
   <div class="dialog-content">
-    <h3>Set a different blog URL</h3>
+    @if (blogURLChanged) {
+    <div class="dialog-content-wrapper">
+      <p>Blog URL temporarily changed</p>
+      <p>not persistent</p>
+      <p>Blog URL will return to</p>
+      <p>default when you refresh the page</p>
+    </div>
+    } @else {
+    <h3>Try with your Blog</h3>
     <p>try AnguHashBlog</p>
-    <small>with another Hashnode Blog</small>
+    <small>with another Hashnode blog </small>
     <input type="text" placeholder="Type a Blog URL..." [(ngModel)]="newBlogURL">
     <small>must be an existing Hashnode Blog</small>
+    <div class="dialog-actions">
+      <button (click)="changeBlogURL()">Change</button>
+      <button>Reset</button>
+    </div>
+    }
   </div>
-  <div class="dialog-actions">
-    <button (click)="onInputChange()">Change</button>
-    <button>Reset</button>
-  </div>
-  @if (newBlogURL !== '') {
-    <p>Blog URL temporarily changed - not persistent</p>
-    <p>Blog URL will return to default when you refresh the page</p>
-  }
 </div>
-

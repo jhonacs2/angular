@@ -13,19 +13,26 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 export class SettingsDialogComponent implements OnInit {
   blogURL: string = 'hashnode.anguhashblog.com';
   newBlogURL: string = '';
+  blogURLChanged: boolean = false;
   modalService: ModalService = inject(ModalService);
   blogService: BlogService = inject(BlogService);
 
   ngOnInit(): void {
-    this.blogService.getBlogURL();
-    // console.log(this.blogService.getBlogURL())
+    this.blogURL = this.blogService.getBlogURL();
+    if (this.blogURL === "hashnode.anguhashblog.com") {
+      this.blogURLChanged = false;
+    } else {
+      this.blogURLChanged = true;
+    }
   }
 
-  onInputChange(): void {
+  changeBlogURL(): void {
     this.blogService.setBlogURL(this.newBlogURL);
-    this.modalService.showSettingsDialog = false;
-    // console.log(this.blogURL)
-    // console.log(this.blogService.getBlogURL())
-    // this.blogService.getBlogInfo(this.newBlogURL);
+    this.blogURL = this.blogService.getBlogURL();
+    if (this.blogURL === "hashnode.anguhashblog.com") {
+      this.blogURLChanged = false;
+    } else {
+      this.blogURLChanged = true;
+    }
   }
 }
