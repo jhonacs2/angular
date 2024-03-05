@@ -20,6 +20,7 @@ import { SettingsDialogComponent } from "../../partials/settings-dialog/settings
 	styleUrl: "./header.component.scss",
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  blogURL!: string;
 	blogInfo!: BlogInfo;
 	blogName: string = "";
 	// start with default image to prevent 404 when returning from post-details page
@@ -33,8 +34,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	private querySubscription?: Subscription;
 
 	ngOnInit(): void {
+    this.blogURL = this.blogService.getBlogURL();
 		this.querySubscription = this.blogService
-			.getBlogInfo()
+			.getBlogInfo(this.blogURL)
 			.subscribe((data) => {
 				this.blogInfo = data;
 				this.blogName = this.blogInfo.title;
@@ -43,7 +45,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 						? (this.blogImage = this.blogInfo.favicon)
 						: "/assets/images/anguhashblog-logo.jpg";
 				if (!this.blogInfo.isTeam) {
-					this.blogService.getAuthorInfo().subscribe((data) => {
+					this.blogService.getAuthorInfo(this.blogURL).subscribe((data) => {
 						this.blogImage = data.profilePicture
 							? data.profilePicture
 							: "/assets/images/anguhashblog-logo.jpg";
@@ -53,7 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				this.blogSocialLinks = links;
 			});
 		this.querySubscription = this.blogService
-			.getSeriesList()
+			.getSeriesList(this.blogURL)
 			.subscribe((data) => {
 				this.seriesList = data;
 			});

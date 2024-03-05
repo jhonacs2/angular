@@ -11,18 +11,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './settings-dialog.component.scss'
 })
 export class SettingsDialogComponent implements OnInit {
+  blogURL: string = 'hashnode.anguhashblog.com';
   newBlogURL: string = '';
   modalService: ModalService = inject(ModalService);
   blogService: BlogService = inject(BlogService);
 
   ngOnInit(): void {
-    this.blogService.setBlogURL(this.newBlogURL);
+    this.blogService.getBlogURL();
+    // console.log(this.blogService.getBlogURL())
   }
 
   onInputChange(): void {
     this.blogService.setBlogURL(this.newBlogURL);
     this.modalService.showSettingsDialog = false;
-    console.log(this.blogService.getBlogURL())
-    this.blogService.getBlogInfo();
+    // console.log(this.blogURL)
+    // console.log(this.blogService.getBlogURL())
+    // this.blogService.getBlogInfo(this.newBlogURL);
   }
 }
