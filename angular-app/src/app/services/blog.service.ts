@@ -37,7 +37,11 @@ export class BlogService {
   getPosts(first: number = 10, after: string = ''): Observable<BlogPaginationInfo> {
     return this.apollo
       .watchQuery<any>({
-        query: GET_POSTS(first,after),
+        query: GET_POSTS,
+        variables:{
+          first,
+          after
+        }
       })
       .valueChanges.pipe(
         map(({ data }) => {
@@ -57,15 +61,22 @@ export class BlogService {
     .valueChanges.pipe(map(({ data }) => data.publication.seriesList.edges.map((edge: { node: any; }) => edge.node)));
   }
 
-  getPostsInSeries(slug: string): Observable<Post[]> {
+  getPostsInSeries(slug: string,after: string = ''): Observable<BlogPaginationInfo> {
     return this.apollo
     .watchQuery<any>({
       query: GET_POSTS_IN_SERIES,
       variables: {
-        slug: slug,
+        slug,
+        after
       },
-    })
-    .valueChanges.pipe(map(({ data }) => data.publication.series.posts.edges.map((edge: { node: any; }) => edge.node)));
+    }).valueChanges.pipe(
+        map(({ data }) => {
+          const { edges, pageInfo } = data.publication.series.posts;
+          return {
+            posts: edges.map((edge: { node: any; }) => edge.node),
+            pagination: pageInfo
+          };
+        }));
   }
 
 

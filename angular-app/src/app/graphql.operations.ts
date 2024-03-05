@@ -49,14 +49,14 @@ query Publication {
 }
 `;
 
-export function GET_POSTS(first:number, after:string){
-  return gql`
-    query Publication {
+export const GET_POSTS=
+   gql`
+    query Publication ($first: Int!, $after: String!){
       publication(host: "${BLOG_HOST}") {
         id,
         isTeam,
         title,
-        posts(first: ${first},after:"${after}") {
+        posts(first: $first, after: $after) {
           edges {
             node {
               id,
@@ -78,8 +78,7 @@ export function GET_POSTS(first:number, after:string){
         }
       }
     }
-  `
-}
+  `;
 
 export const GET_SERIES_LIST = gql`
 query Publication {
@@ -100,13 +99,13 @@ query Publication {
 `;
 
 export const GET_POSTS_IN_SERIES = gql`
-query Publication ($slug: String!) {
+query Publication ($slug: String!, $after: String!) {
   publication(host: "${BLOG_HOST}") {
     id,
     isTeam ,
     title,
     series(slug: $slug) {
-      posts(first: 10) {
+      posts(first: 10, after: $after) {
         edges {
           node {
             id,
@@ -116,6 +115,10 @@ query Publication ($slug: String!) {
               url
             }
           }
+        }
+        pageInfo {
+          endCursor,
+          hasNextPage
         }
       }
     }
