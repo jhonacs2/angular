@@ -5,7 +5,6 @@
       <h1>{{ blogName }}</h1>
     </a>
     <div class="controls">
-
       <div class="search">
         <button><span class="material-symbols-outlined">
             search
@@ -18,13 +17,17 @@
       </div>
       <div class="theme-control">
         @if (themeService.themeSignal() == 'dark') {
-        <span class="material-symbols-outlined" (click)="toggleTheme()">
-          toggle_on
-        </span>
+          <button>
+            <span class="material-symbols-outlined" (click)="toggleTheme()">
+              dark_mode
+            </span>
+          </button>
         } @else {
-        <span class="material-symbols-outlined" (click)="toggleTheme()">
-          toggle_off
-        </span>
+          <button>
+            <span class="material-symbols-outlined" (click)="toggleTheme()">
+              light_mode
+            </span>
+          </button>
         }
       </div>
     </div>

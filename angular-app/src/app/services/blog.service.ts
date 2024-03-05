@@ -10,15 +10,22 @@ import { BlogInfo } from '../models/blog-info';
 })
 export class BlogService {
   blogURL: string = "hashnode.anguhashblog.com";
+  private readonly localStorageKey = 'userBlogURL';
 
   constructor(private apollo: Apollo) { }
 
   getBlogURL(): string {
-    return this.blogURL;
+    return localStorage.getItem(this.localStorageKey) || 'hashnode.anguhashblog.com';
   }
 
   setBlogURL(newBlogURL: string): void {
+    localStorage.setItem(this.localStorageKey, newBlogURL);
     this.blogURL = newBlogURL;
+  }
+
+  resetBlogURL(): void {
+    localStorage.removeItem(this.localStorageKey);
+    this.blogURL = 'hashnode.anguhashblog.com';
   }
 
   getBlogInfo(host: string): Observable<BlogInfo> {

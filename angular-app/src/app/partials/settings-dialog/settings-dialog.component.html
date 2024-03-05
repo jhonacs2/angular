@@ -8,10 +8,13 @@
   <div class="dialog-content">
     @if (blogURLChanged) {
     <div class="dialog-content-wrapper">
-      <p>Blog URL temporarily changed</p>
-      <p>not persistent</p>
-      <p>Blog URL will return to</p>
-      <p>default when you refresh the page</p>
+      <p>Blog URL changed and set in local storage</p>
+      <p>Reload the page to see your content loading</p>
+      <p>When resetting you may need to click on</p>
+      <p>the logo image to load the content again</p>
+      <div class="dialog-actions">
+        <button (click)="resetBlogURL()">Reset</button>
+      </div>
     </div>
     } @else {
     <h3>Try with your Blog</h3>
@@ -21,7 +24,6 @@
     <small>must be an existing Hashnode Blog</small>
     <div class="dialog-actions">
       <button (click)="changeBlogURL()">Change</button>
-      <button>Reset</button>
     </div>
     }
   </div>

@@ -35,4 +35,10 @@ export class SettingsDialogComponent implements OnInit {
       this.blogURLChanged = true;
     }
   }
+
+  resetBlogURL(): void {
+    this.blogService.resetBlogURL();
+    this.blogURL = this.blogService.getBlogURL();
+    this.blogURLChanged = false;
+  }
 }
