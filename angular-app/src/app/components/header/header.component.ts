@@ -10,11 +10,12 @@ import { FollowDialogComponent } from "../../partials/follow-dialog/follow-dialo
 import { ModalService } from "../../services/modal.service";
 import { IconService } from "../../services/icon.service";
 import { SvgIconComponent } from "../../partials/svg-icon/svg-icon.component";
+import { SettingsDialogComponent } from "../../partials/settings-dialog/settings-dialog.component";
 
 @Component({
 	selector: "app-header",
 	standalone: true,
-	imports: [KeyValuePipe, AsyncPipe, RouterLink, FollowDialogComponent, SvgIconComponent],
+	imports: [KeyValuePipe, AsyncPipe, RouterLink, FollowDialogComponent, SvgIconComponent, SettingsDialogComponent],
 	templateUrl: "./header.component.html",
 	styleUrl: "./header.component.scss",
 })

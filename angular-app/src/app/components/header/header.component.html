@@ -4,32 +4,46 @@
       <img src="{{blogImage}}" alt="logo" />
       <h1>{{ blogName }}</h1>
     </a>
-    <div class="theme-control">
-      @if (themeService.themeSignal() == 'dark') {
-      <button (click)="toggleTheme()"><span class="material-symbols-outlined">
-          bedtime
-        </span></button>
-      } @else {
-      <button (click)="toggleTheme()"><span class="material-symbols-outlined">
-          wb_sunny
-        </span></button>
-      }
+    <div class="controls">
+
+      <div class="search">
+        <button><span class="material-symbols-outlined">
+            search
+          </span></button>
+      </div>
+      <div class="settings">
+        <button (click)="modalService.showSettingsDialog=true"><span class="material-symbols-outlined">
+            settings
+          </span></button>
+      </div>
+      <div class="theme-control">
+        @if (themeService.themeSignal() == 'dark') {
+        <span class="material-symbols-outlined" (click)="toggleTheme()">
+          toggle_on
+        </span>
+        } @else {
+        <span class="material-symbols-outlined" (click)="toggleTheme()">
+          toggle_off
+        </span>
+        }
+      </div>
     </div>
+
   </div>
   <div class="toolbar-row">
     <div class="social">
       <div class="social-link">
         @for (social of blogSocialLinks | keyvalue; track social) {
-          @if (social.value) {
-          <a href="{{social.value}}" target="_blank" rel="noopener noreferrer">
-            <app-svg-icon [icon]="social.key"></app-svg-icon>
-          </a>
-          }
+        @if (social.value) {
+        <a href="{{social.value}}" target="_blank" rel="noopener noreferrer">
+          <app-svg-icon [icon]="social.key"></app-svg-icon>
+        </a>
+        }
         }
       </div>
     </div>
     <div class="follow">
-      <button (click)="modalService.showDialog=true">Follow</button>
+      <button (click)="modalService.showFollowDialog=true">Follow</button>
     </div>
   </div>
   <div class="toolbar-row">
@@ -40,6 +54,9 @@
     </div>
   </div>
 </div>
-@if (modalService.showDialog) {
-  <app-follow-dialog></app-follow-dialog>
+@if (modalService.showSettingsDialog) {
+<app-settings-dialog></app-settings-dialog>
+}
+@if (modalService.showFollowDialog) {
+<app-follow-dialog></app-follow-dialog>
 }

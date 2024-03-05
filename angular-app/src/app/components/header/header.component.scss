@@ -29,6 +29,21 @@
       }
     }
 
+    .controls {
+      display: flex;
+      div {
+        padding: 0 0.2rem;
+      }
+      .theme-control {
+        display: flex;
+        align-items: center;
+        span {
+          font-size: 2.3rem;
+          cursor: pointer;
+        }
+      }
+    }
+
     .social {
       display: flex;
       align-items: flex-start;

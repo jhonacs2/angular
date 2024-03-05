@@ -9,13 +9,23 @@ import { BlogInfo } from '../models/blog-info';
   providedIn: 'root'
 })
 export class BlogService {
+  private blogURL: string = "hashnode.anguhashblog.com";
 
   constructor(private apollo: Apollo) { }
+
+  getBlogURL(): string {
+    return this.blogURL;
+  }
+
+  setBlogURL(newBlogURL: string): void {
+    this.blogURL = newBlogURL;
+  }
 
   getBlogInfo(): Observable<BlogInfo> {
     return this.apollo
     .watchQuery<any>({
       query: GET_BLOG_INFO,
+      variables: { host: this.blogURL },
     })
     .valueChanges.pipe(map(({ data }) => data.publication));
   }
