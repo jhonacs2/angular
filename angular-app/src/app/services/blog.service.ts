@@ -9,8 +9,8 @@ import {
   GET_SERIES_LIST,
   GET_SINGLE_POST
 } from '../graphql.operations';
-import { Author, Post, SeriesList } from '../models/post';
-import { BlogInfo, BlogPaginationInfo } from '../models/blog-info';
+import { Author, BlogPaginationInfo, Post, SeriesList } from '../models/post';
+import { BlogInfo,  } from '../models/blog-info';
 
 @Injectable({
   providedIn: 'root'
