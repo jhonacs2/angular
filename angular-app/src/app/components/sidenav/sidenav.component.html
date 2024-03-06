@@ -12,11 +12,13 @@
           @if (social.value && social.key !== 'website') {
           <a href="{{social.value}}" target="_blank" rel="noopener noreferrer">
             <i class="fa-brands fa-{{social.key}}"></i>
+            <app-svg-icon [icon]="social.key"></app-svg-icon>
           </a>
           }
           @if (social.value && social.key === 'website') {
           <a href="{{social.value}}" target="_blank" rel="noopener noreferrer">
             <i class="fa-solid fa-globe"></i>
+            <app-svg-icon [icon]="social.key"></app-svg-icon>
           </a>
           }
         }
