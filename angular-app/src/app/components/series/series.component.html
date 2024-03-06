@@ -1,4 +1,4 @@
-<div class="series-view" infiniteScroll [isActiveInfiniteScroll]="isActiveInfiniteScroll" (scrolled)="loadMorePosts()">
+<div class="series-view" infiniteScroll [isActiveInfiniteScroll]="isActiveInfiniteScroll" (scrolled)="loadMorePostsFromSeries()">
   <div class="cards-wrapper grid">
     @for (post of postsInSeries; track post) {
       <a (click)="navigateToPost(post.slug)" class="card">
@@ -14,7 +14,7 @@
 
   @if (paginationInfo.hasNextPage && !isHiddenLoadMore) {
     <div class="load-more-posts">
-      <button (click)="loadMorePosts()">Load more</button>
+      <button (click)="loadMorePostsFromSeries()">Load more</button>
     </div>
   }
 </div>

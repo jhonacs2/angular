@@ -29,7 +29,7 @@ export class SeriesComponent implements OnInit {
     this.blogURL = this.blogService.getBlogURL();
     this.route.params.subscribe(params => {
       this.slug = params['slug'];
-      this.getPostsInSeries();
+      this.loadPostsInSeries();
     });
   }
 
@@ -37,22 +37,22 @@ export class SeriesComponent implements OnInit {
     this.router.navigate(['/post', slug]);
   }
 
-  loadMorePosts():void {
-    if (!this.paginationInfo.hasNextPage) return;
-    this.isHiddenLoadMore = true;
-    this.blogService.getPosts(this.blogURL, 10, this.paginationInfo.endCursor).pipe(
-    ).subscribe(newPosts => {
-      this.isActiveInfiniteScroll = true;
-      this.paginationInfo = newPosts.pagination;
-      this.postsInSeries = this.postsInSeries.concat(newPosts.posts);
-    });
-  }
-
-  private getPostsInSeries():void{
+  private loadPostsInSeries():void{
     this.blogService.getPostsInSeries(this.blogURL, this.slug).subscribe(blogInfo => {
       this.paginationInfo = blogInfo.pagination;
       this.isHiddenLoadMore = !blogInfo.pagination.hasNextPage;
       this.postsInSeries = blogInfo.posts;
     })
+  }
+
+  loadMorePostsFromSeries():void {
+    if (!this.paginationInfo.hasNextPage) return;
+    this.isHiddenLoadMore = true;
+    this.blogService.getPostsInSeries(this.blogURL, this.slug, this.paginationInfo.endCursor).pipe(
+    ).subscribe(newPosts => {
+      this.isActiveInfiniteScroll = true;
+      this.paginationInfo = newPosts.pagination;
+      this.postsInSeries = this.postsInSeries.concat(newPosts.posts);
+    });
   }
 }

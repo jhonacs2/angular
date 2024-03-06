@@ -32,22 +32,22 @@ export class PostsComponent implements OnInit {
     this.router.navigate(['/post', slug]);
   }
 
+  private loadPosts(): void {
+    this.blogService.getPosts(this.blogURL, this.paginationInfo.endCursor).subscribe(blogPaginationInfo => {
+      this.paginationInfo = blogPaginationInfo.pagination;
+      this.isHiddenLoadMore = !blogPaginationInfo.pagination.hasNextPage;
+      this.posts = blogPaginationInfo.posts;
+    });
+  }
+
   loadMorePosts(): void {
     if (!this.paginationInfo.hasNextPage) return;
     this.isHiddenLoadMore = true;
-    this.blogService.getPosts(this.blogURL, 10, this.paginationInfo.endCursor).pipe(
+    this.blogService.getPosts(this.blogURL, this.paginationInfo.endCursor).pipe(
     ).subscribe(newPosts => {
       this.isActiveInfiniteScroll = true;
       this.paginationInfo = newPosts.pagination;
       this.posts = this.posts.concat(newPosts.posts);
-    });
-  }
-
-  private loadPosts(): void {
-    this.blogService.getPosts(this.blogURL, 10, this.paginationInfo.endCursor).subscribe(blogPaginationInfo => {
-      this.paginationInfo = blogPaginationInfo.pagination;
-      this.isHiddenLoadMore = !blogPaginationInfo.pagination.hasNextPage;
-      this.posts = blogPaginationInfo.posts;
     });
   }
 }

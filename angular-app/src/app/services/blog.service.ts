@@ -53,14 +53,13 @@ export class BlogService {
     .valueChanges.pipe(map(({ data }) => data.publication.author));
   }
 
-  getPosts(host: string, first: number = 10, after: string = ''): Observable<BlogPaginationInfo> {
+  getPosts(host: string, after: string): Observable<BlogPaginationInfo> {
     return this.apollo
       .watchQuery<any>({
         query: GET_POSTS,
         variables:{
-          host,
-          first,
-          after
+          host: host,
+          after: after
         }
       })
       .valueChanges.pipe(
@@ -82,23 +81,23 @@ export class BlogService {
     .valueChanges.pipe(map(({ data }) => data.publication.seriesList.edges.map((edge: { node: any; }) => edge.node)));
   }
 
-  getPostsInSeries(host: string, slug: string,after: string = ''): Observable<BlogPaginationInfo> {
+  getPostsInSeries(host: string, slug: string, after: string = ""): Observable<BlogPaginationInfo> {
     return this.apollo
     .watchQuery<any>({
       query: GET_POSTS_IN_SERIES,
       variables: {
-        host,
-        slug,
-        after
+        host: host,
+        slug: slug,
+        after: after
       },
     }).valueChanges.pipe(
-        map(({ data }) => {
-          const { edges, pageInfo } = data.publication.series.posts;
-          return {
-            posts: edges.map((edge: { node: any; }) => edge.node),
-            pagination: pageInfo
-          };
-        }));
+      map(({ data }) => {
+        const { edges, pageInfo } = data.publication.series.posts;
+        return {
+          posts: edges.map((edge: { node: any; }) => edge.node),
+          pagination: pageInfo
+        };
+      }));
   }
 
 

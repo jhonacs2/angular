@@ -2,6 +2,7 @@
   width: 95vw;
   min-height: 67.2vh;
   padding: 0.5rem 0;
+  margin-bottom: 2rem;
 
   .layout-control {
     display: flex;
@@ -12,7 +13,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 2rem 1rem;
+    margin: 2rem 1rem 1rem;
 
     &.grid {
       .card {
@@ -52,5 +53,9 @@
   .load-more-posts {
     display: flex;
     justify-content: center;
+    button {
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
   }
 }
