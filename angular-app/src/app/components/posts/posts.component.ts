@@ -1,14 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
 import { Router, RouterLink } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, SlicePipe } from '@angular/common';
 import { PageInfo, Post } from '../../models/post';
 import { InfiniteScrollDirective } from '../../directives/infinite-scroll.directive';
 
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [RouterLink, AsyncPipe, InfiniteScrollDirective],
+  imports: [RouterLink, AsyncPipe, InfiniteScrollDirective, SlicePipe],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
 })
