@@ -50,4 +50,13 @@ export class PostsComponent implements OnInit {
       this.posts = this.posts.concat(newPosts.posts);
     });
   }
+  truncateTitle(title: string): string {
+    const maxTitleLength = 85;
+    if (title.length > maxTitleLength) {
+      const truncatedTitle = title.substring(0, maxTitleLength);
+      const lastSpaceIndex = truncatedTitle.lastIndexOf(' ');
+      return truncatedTitle.substring(0, lastSpaceIndex) + '...';
+    }
+    return title;
+  }
 }
