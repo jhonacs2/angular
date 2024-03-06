@@ -1,9 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Post } from '../../models/post';
+import { PageInfo, Post } from '../../models/post';
 import { AsyncPipe } from '@angular/common';
 import { BlogService } from '../../services/blog.service';
-import { PageInfo } from '../../models/blog-info';
 import { InfiniteScrollDirective } from '../../directives/infinite-scroll.directive';
 
 @Component({
