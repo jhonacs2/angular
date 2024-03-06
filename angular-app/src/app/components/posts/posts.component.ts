@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
 import { Router, RouterLink } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, SlicePipe } from '@angular/common';
 import { Post } from '../../models/post';
 import { PageInfo } from '../../models/blog-info';
 import { InfiniteScrollDirective } from '../../directives/infinite-scroll.directive';
@@ -9,7 +9,7 @@ import { InfiniteScrollDirective } from '../../directives/infinite-scroll.direct
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [RouterLink, AsyncPipe, InfiniteScrollDirective],
+  imports: [RouterLink, AsyncPipe, InfiniteScrollDirective, SlicePipe],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
 })
@@ -49,14 +49,5 @@ export class PostsComponent implements OnInit {
       this.paginationInfo = newPosts.pagination;
       this.posts = this.posts.concat(newPosts.posts);
     });
-  }
-  truncateTitle(title: string): string {
-    const maxTitleLength = 85;
-    if (title.length > maxTitleLength) {
-      const truncatedTitle = title.substring(0, maxTitleLength);
-      const lastSpaceIndex = truncatedTitle.lastIndexOf(' ');
-      return truncatedTitle.substring(0, lastSpaceIndex) + '...';
-    }
-    return title;
   }
 }

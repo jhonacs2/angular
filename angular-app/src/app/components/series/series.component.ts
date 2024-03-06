@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Post } from '../../models/post';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, SlicePipe } from '@angular/common';
 import { BlogService } from '../../services/blog.service';
 import { PageInfo } from '../../models/blog-info';
 import { InfiniteScrollDirective } from '../../directives/infinite-scroll.directive';
@@ -9,7 +9,7 @@ import { InfiniteScrollDirective } from '../../directives/infinite-scroll.direct
 @Component({
   selector: 'app-series',
   standalone: true,
-  imports: [RouterLink, AsyncPipe, InfiniteScrollDirective],
+  imports: [RouterLink, AsyncPipe, InfiniteScrollDirective, SlicePipe],
   templateUrl: './series.component.html',
   styleUrl: './series.component.scss',
 })
