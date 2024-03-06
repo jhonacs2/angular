@@ -49,12 +49,12 @@ query Publication ($host: String!) {
 
 export const GET_POSTS=
    gql`
-    query Publication ($host: String!, $first: Int!, $after: String!){
+    query Publication ($host: String!, $after: String!){
       publication(host: $host) {
         id,
         isTeam,
         title,
-        posts(first: $first, after: $after) {
+        posts(first: 10, after: $after) {
           edges {
             node {
               id,
@@ -97,7 +97,7 @@ query Publication ($host: String!) {
 `;
 
 export const GET_POSTS_IN_SERIES = gql`
-query Publication ($host: String!,$slug: String!, $after: String!) {
+query Publication ($host: String!, $slug: String!, $after: String!) {
   publication(host: $host) {
     id,
     isTeam ,
