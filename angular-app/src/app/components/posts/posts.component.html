@@ -1,6 +1,6 @@
-<div class="posts-view">
+<div class="posts-view" infiniteScroll [isActiveInfiniteScroll]="isActiveInfiniteScroll" (scrolled)="loadMorePosts()">
   <div class="cards-wrapper grid">
-    @for (post of posts$ | async; track post) {
+    @for (post of posts; track post) {
       <a (click)="navigateToPost(post.slug)" class="card">
         <div class="card-image">
           <img [src]="post.coverImage.url">
@@ -11,4 +11,10 @@
       </a>
     }
   </div>
+
+  @if (paginationInfo.hasNextPage && !isHiddenLoadMore) {
+    <div class="load-more-posts">
+      <button (click)="loadMorePosts()">Load more</button>
+    </div>
+  }
 </div>

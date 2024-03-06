@@ -47,31 +47,36 @@ query Publication ($host: String!) {
 }
 `;
 
-export const GET_POSTS = gql`
-query Publication ($host: String!) {
-  publication(host: $host) {
-    id,
-    isTeam,
-    title,
-    posts(first: 10) {
-      edges {
-        node {
-          id,
-          slug,
-          coverImage {
-            url
+export const GET_POSTS=
+   gql`
+    query Publication ($host: String!, $first: Int!, $after: String!){
+      publication(host: $host) {
+        id,
+        isTeam,
+        title,
+        posts(first: $first, after: $after) {
+          edges {
+            node {
+              id,
+              slug,
+              coverImage {
+                url
+              }
+              title,
+              brief,
+              content {
+                html
+              }
+            }
           }
-          title,
-          brief,
-          content {
-            html
+          pageInfo {
+            endCursor,
+            hasNextPage
           }
         }
       }
     }
-  }
-}
-`;
+  `;
 
 export const GET_SERIES_LIST = gql`
 query Publication ($host: String!) {
@@ -92,13 +97,13 @@ query Publication ($host: String!) {
 `;
 
 export const GET_POSTS_IN_SERIES = gql`
-query Publication ($host: String!, $slug: String!) {
+query Publication ($host: String!,$slug: String!, $after: String!) {
   publication(host: $host) {
     id,
     isTeam ,
     title,
     series(slug: $slug) {
-      posts(first: 10) {
+      posts(first: 10, after: $after) {
         edges {
           node {
             id,
@@ -108,6 +113,10 @@ query Publication ($host: String!, $slug: String!) {
               url
             }
           }
+        }
+        pageInfo {
+          endCursor,
+          hasNextPage
         }
       }
     }
