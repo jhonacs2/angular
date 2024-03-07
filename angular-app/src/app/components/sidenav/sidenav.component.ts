@@ -5,7 +5,6 @@ import { BlogService } from '../../services/blog.service';
 import { SeriesList } from '../../models/post';
 import { RouterLink } from '@angular/router';
 import { KeyValuePipe } from '@angular/common';
-import { IconService } from "../../services/icon.service";
 import { SvgIconComponent } from "../../partials/svg-icon/svg-icon.component";
 
 @Component({

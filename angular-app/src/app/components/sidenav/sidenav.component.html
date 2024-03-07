@@ -9,15 +9,8 @@
     <div class="social">
       <div class="social-link">
         @for (social of blogSocialLinks | keyvalue; track social) {
-          @if (social.value && social.key !== 'website') {
+          @if (social.value) {
           <a href="{{social.value}}" target="_blank" rel="noopener noreferrer">
-            <i class="fa-brands fa-{{social.key}}"></i>
-            <app-svg-icon [icon]="social.key"></app-svg-icon>
-          </a>
-          }
-          @if (social.value && social.key === 'website') {
-          <a href="{{social.value}}" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-globe"></i>
             <app-svg-icon [icon]="social.key"></app-svg-icon>
           </a>
           }

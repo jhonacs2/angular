@@ -30,11 +30,14 @@
 
       .social {
         display: flex;
-        width: 100%;
+        width: 80%;
         margin: 1rem 0;
 
         .social-link {
           display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
           a {
             margin: 0 0.2rem;
           }
