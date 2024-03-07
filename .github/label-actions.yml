@@ -1,7 +1,7 @@
 # The `needs triage` label is added to new issues
 needs-triage:
   issues:
-
+    types: [opened]
     if: "${{ issue-author != 'monacodelisa' }}"
     add-labels: '👀 needs triage'
 
