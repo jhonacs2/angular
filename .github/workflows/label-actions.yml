@@ -2,11 +2,11 @@ name: 'Label Actions'
 
 on:
   issues:
-    types: [labeled, unlabeled]
+    types: [labeled, unlabeled, opened]
   pull_request_target:
-    types: [labeled, unlabeled]
+    types: [labeled, unlabeled, opened]
   discussion:
-    types: [labeled, unlabeled]
+    types: [labeled, unlabeled, created]
 
 permissions:
   contents: read
