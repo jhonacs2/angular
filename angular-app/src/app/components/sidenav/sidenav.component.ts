@@ -5,11 +5,12 @@ import { BlogService } from '../../services/blog.service';
 import { SeriesList } from '../../models/post';
 import { RouterLink } from '@angular/router';
 import { KeyValuePipe } from '@angular/common';
+import { SvgIconComponent } from "../../partials/svg-icon/svg-icon.component";
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [RouterLink, KeyValuePipe],
+  imports: [RouterLink, KeyValuePipe, SvgIconComponent],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss'
 })
