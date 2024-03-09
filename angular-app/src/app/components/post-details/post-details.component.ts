@@ -31,6 +31,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 	blogInfo!: BlogInfo;
 	blogName: string = "";
 	post$!: Observable<Post>;
+  modifiedPost!: Post;
 	themeService: ThemeService = inject(ThemeService);
 	route: ActivatedRoute = inject(ActivatedRoute);
   private sanitizer: DomSanitizer = inject(DomSanitizer);
@@ -64,27 +65,37 @@ export class PostDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.post$.subscribe((post) => {
       // Log the post data to the console
-      console.log('Post data:', post.content.html);
+      console.log('Post data:', post.content);
 
       // Extract the HTML content from post
-      const htmlContent = post.content.html;
+      let htmlContent = post.content.html;
 
       // Create a temporary div to parse the HTML
-      const tempDiv = document.createElement('div');
+      let tempDiv = document.createElement('div');
       tempDiv.innerHTML = htmlContent;
 
       // Try to access the element here using querySelector
-      const embedWrapperDiv = tempDiv.querySelector('.embed-wrapper');
+      let embedWrapperDiv = tempDiv.querySelector('.embed-wrapper');
 
       if (embedWrapperDiv) {
         console.log('Element found:', embedWrapperDiv);
 
+        // Set the inner HTML using Renderer
         this.renderer.setProperty(embedWrapperDiv, 'innerHTML', '<p>Your new HTML content</p>');
+
+        // Clone the post object to make modifications
+        this.modifiedPost = { ...post };
+
+        // Assign the modified HTML content to the cloned post object
+        this.modifiedPost.content = { ...post.content, html: tempDiv.innerHTML.toString() };
+
+        // Now you can use the modifiedPost object as needed
       } else {
         console.error('Element not found');
       }
     });
   }
+
 
   sanitizeHtml(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
