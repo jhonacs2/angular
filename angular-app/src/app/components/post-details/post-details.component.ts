@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Renderer2, Input, OnDestroy, OnInit, inject } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Post } from '../../models/post';
@@ -25,7 +25,7 @@ import { BlogInfo } from '../../models/blog-info';
 	templateUrl: "./post-details.component.html",
 	styleUrl: "./post-details.component.scss",
 })
-export class PostDetailsComponent implements OnInit, OnDestroy {
+export class PostDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 	sidenavOpen: boolean = false;
 	blogURL!: string;
 	blogInfo!: BlogInfo;
@@ -36,6 +36,9 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
   private sanitizer: DomSanitizer = inject(DomSanitizer);
 	private blogService = inject(BlogService);
 	private querySubscription?: Subscription;
+
+  // private el = inject(ElementRef);
+  private renderer = inject(Renderer2);
 
 	@Input({ required: true }) slug!: string;
 
@@ -57,6 +60,31 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 	toggleSidenav() {
 		this.sidenavOpen = !this.sidenavOpen;
 	}
+
+  ngAfterViewInit() {
+    this.post$.subscribe((post) => {
+      // Log the post data to the console
+      console.log('Post data:', post.content.html);
+
+      // Extract the HTML content from post
+      const htmlContent = post.content.html;
+
+      // Create a temporary div to parse the HTML
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = htmlContent;
+
+      // Try to access the element here using querySelector
+      const embedWrapperDiv = tempDiv.querySelector('.embed-wrapper');
+
+      if (embedWrapperDiv) {
+        console.log('Element found:', embedWrapperDiv);
+
+        this.renderer.setProperty(embedWrapperDiv, 'innerHTML', '<p>Your new HTML content</p>');
+      } else {
+        console.error('Element not found');
+      }
+    });
+  }
 
   sanitizeHtml(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
