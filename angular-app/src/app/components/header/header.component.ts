@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	blogInfo!: BlogInfo;
 	blogName: string = "";
 	// start with default image to prevent 404 when returning from post-details page
-	blogImage: string = "/assets/images/anguhashblog-logo.jpg";
+	blogImage: string = "/assets/images/anguhashblog-logo-purple-bgr.jpg";
 	blogSocialLinks!: BlogLinks;
 	seriesList!: SeriesList[];
 	themeService: ThemeService = inject(ThemeService);
@@ -43,12 +43,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				this.blogImage =
 					this.blogInfo.isTeam && this.blogInfo.favicon
 						? (this.blogImage = this.blogInfo.favicon)
-						: "/assets/images/anguhashblog-logo.jpg";
+						: "/assets/images/anguhashblog-logo-purple-bgr.jpg";
 				if (!this.blogInfo.isTeam) {
 					this.blogService.getAuthorInfo(this.blogURL).subscribe((data) => {
 						this.blogImage = data.profilePicture
 							? data.profilePicture
-							: "/assets/images/anguhashblog-logo.jpg";
+							: "/assets/images/anguhashblog-logo-purple-bgr.jpg";
 					});
 				}
 				const { __typename, ...links } = data.links;
