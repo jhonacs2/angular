@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { AsyncPipe, SlicePipe } from '@angular/common';
 import { PageInfo, Post } from '../../models/post';
 import { InfiniteScrollDirective } from '../../directives/infinite-scroll.directive';
@@ -20,15 +20,9 @@ export class PostsComponent implements OnInit {
   isHiddenLoadMore: boolean = true;
   isActiveInfiniteScroll: boolean = false;
 
-  private router = inject(Router);
-
   ngOnInit() {
     this.blogURL = this.blogService.getBlogURL();
     this.loadPosts();
-  }
-
-  navigateToPost(slug: string) {
-    this.router.navigate(['/post', slug]);
   }
 
   private loadPosts(): void {
