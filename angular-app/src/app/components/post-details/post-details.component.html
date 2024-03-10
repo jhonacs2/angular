@@ -61,7 +61,7 @@
           </div>
         </div>
       </div>
-      <div class="content" [innerHTML]="sanitizeHtml(modifiedPost.content.html)" clipboardCopyButton></div>
+      <div class="content" [innerHTML]="post.content.html | sanitizerHtml" clipboardCopyButton appYoutubeVideo></div>
     </article>
     }
   </div>
