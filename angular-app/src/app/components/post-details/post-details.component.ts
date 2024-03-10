@@ -76,12 +76,28 @@ export class PostDetailsComponent implements OnInit, OnDestroy, AfterViewInit {
 
       // Try to access the element here using querySelector
       let embedWrapperDiv = tempDiv.querySelector('.embed-wrapper');
+			let anchorElement = tempDiv.querySelector('.embed-card');
+			let youtubeUrl = anchorElement?.getAttribute('href');
+			let videoId;
+
+			if (youtubeUrl) {
+				if (youtubeUrl.includes('youtube.com/watch?v=')) {
+					videoId = youtubeUrl.split('v=')[1];
+				} else if (youtubeUrl.includes('youtu.be/')) {
+					videoId = youtubeUrl.split('youtu.be/')[1];
+				}
+			}
+
+			let width = 100; // Set your desired width
+			let height = width * 4.5;
+
+			console.log('Video ID:', videoId);
 
       if (embedWrapperDiv) {
         console.log('Element found:', embedWrapperDiv);
 
         // Set the inner HTML using Renderer
-        this.renderer.setProperty(embedWrapperDiv, 'innerHTML', '<p>Your new HTML content</p>');
+        this.renderer.setProperty(embedWrapperDiv, 'innerHTML', `<iframe width="100%" height="${height}" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`);
 
         // Clone the post object to make modifications
         this.modifiedPost = { ...post };
