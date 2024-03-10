@@ -126,6 +126,7 @@ export const GET_POSTS_IN_SERIES = gql`
 export const GET_SINGLE_POST = gql`
 	query SinglePost($host: String!, $slug: String!) {
 		publication(host: $host) {
+      id
 			post(slug: $slug) {
 				id
 				slug
