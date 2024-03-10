@@ -10,7 +10,7 @@ import { ThemeService } from '../../services/theme.service';
 import { FooterComponent } from '../footer/footer.component';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { BlogInfo } from '../../models/blog-info';
-import { YoutubeVideoDirective } from '../../directives/youtube-video.directive';
+import { YoutubeVideoEmbedDirective } from '../../directives/youtube-video-embed.directive';
 
 @Component({
 	selector: "app-post-details",
@@ -23,7 +23,7 @@ import { YoutubeVideoDirective } from '../../directives/youtube-video.directive'
 		DatePipe,
     SanitizerHtmlPipe,
 		ClipboardCopyButtonDirective,
-    YoutubeVideoDirective
+    YoutubeVideoEmbedDirective
 	],
 	templateUrl: "./post-details.component.html",
 	styleUrl: "./post-details.component.scss",

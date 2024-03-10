@@ -1,4 +1,4 @@
-import { YoutubeVideoDirective } from './youtube-video.directive';
+import { YoutubeVideoDirective } from './youtube-video-embed.directive';
 
 describe('YoutubeVideoDirective', () => {
   it('should create an instance', () => {

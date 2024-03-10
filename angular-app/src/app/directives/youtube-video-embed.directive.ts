@@ -1,10 +1,10 @@
 import { AfterViewInit, Directive, Renderer2, ElementRef } from "@angular/core";
 
 @Directive({
-	selector: "[appYoutubeVideo]",
+	selector: "[youtubeVideoEmbed]",
 	standalone: true,
 })
-export class YoutubeVideoDirective implements AfterViewInit {
+export class YoutubeVideoEmbedDirective implements AfterViewInit {
 	constructor(private el: ElementRef, private render2: Renderer2) {}
 
 	ngAfterViewInit(): void {
