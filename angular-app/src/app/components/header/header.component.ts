@@ -4,9 +4,10 @@ import { Subscription } from "rxjs";
 import { BlogService } from "../../services/blog.service";
 import { AsyncPipe, KeyValuePipe } from "@angular/common";
 import { BlogInfo, BlogLinks } from "../../models/blog-info";
-import { RouterLink } from "@angular/router";
+import { ActivatedRoute, NavigationEnd, Router, RouterLink } from "@angular/router";
 import { SeriesList } from "../../models/post";
 import { FollowDialogComponent } from "../../partials/follow-dialog/follow-dialog.component";
+import { SidenavComponent } from "../sidenav/sidenav.component";
 import { ModalService } from "../../services/modal.service";
 import { IconService } from "../../services/icon.service";
 import { SvgIconComponent } from "../../partials/svg-icon/svg-icon.component";
@@ -15,11 +16,13 @@ import { SettingsDialogComponent } from "../../partials/settings-dialog/settings
 @Component({
 	selector: "app-header",
 	standalone: true,
-	imports: [KeyValuePipe, AsyncPipe, RouterLink, FollowDialogComponent, SvgIconComponent, SettingsDialogComponent],
+	imports: [KeyValuePipe, AsyncPipe, RouterLink, SidenavComponent, FollowDialogComponent, SvgIconComponent, SettingsDialogComponent],
 	templateUrl: "./header.component.html",
 	styleUrl: "./header.component.scss",
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  showMainHeader: boolean = true;
+  sidenavOpen: boolean = false;
   blogURL!: string;
 	blogInfo!: BlogInfo;
 	blogName: string = "";
@@ -31,6 +34,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	blogService: BlogService = inject(BlogService);
 	modalService: ModalService = inject(ModalService);
   iconService: IconService = inject(IconService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 	private querySubscription?: Subscription;
 
 	ngOnInit(): void {
@@ -59,10 +64,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			.subscribe((data) => {
 				this.seriesList = data;
 			});
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.showMainHeader = !this.route.snapshot.firstChild?.paramMap.has('slug');
+      }
+    });
 	}
 
 	toggleTheme(): void {
 		this.themeService.updateTheme();
+	}
+
+  toggleSidenav() {
+		this.sidenavOpen = !this.sidenavOpen;
 	}
 
   getIcon(key: string) {

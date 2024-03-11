@@ -1,5 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit, inject } from "@angular/core";
 import { CommonModule, DOCUMENT } from "@angular/common";
+import { HeaderComponent } from "./components/header/header.component";
+import { FooterComponent } from "./components/footer/footer.component";
 import { RouterOutlet } from "@angular/router";
 import { ThemeService } from "./services/theme.service";
 import { BlogInfo } from "./models/blog-info";
@@ -9,7 +11,7 @@ import { BlogService } from "./services/blog.service";
 @Component({
 	selector: "app-root",
 	standalone: true,
-	imports: [CommonModule, RouterOutlet],
+	imports: [CommonModule, HeaderComponent, FooterComponent, RouterOutlet],
 	templateUrl: "./app.component.html",
 	styleUrl: "./app.component.scss",
 })

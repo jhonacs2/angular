@@ -8,7 +8,6 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ClipboardCopyButtonDirective } from '../../directives/clipboard-copy-button.directive';
 import { ThemeService } from '../../services/theme.service';
 import { FooterComponent } from '../footer/footer.component';
-import { SidenavComponent } from '../sidenav/sidenav.component';
 import { BlogInfo } from '../../models/blog-info';
 import { YoutubeVideoEmbedDirective } from '../../directives/youtube-video-embed.directive';
 
@@ -16,7 +15,6 @@ import { YoutubeVideoEmbedDirective } from '../../directives/youtube-video-embed
 	selector: "app-post-details",
 	standalone: true,
 	imports: [
-		SidenavComponent,
 		FooterComponent,
 		RouterLink,
 		AsyncPipe,
@@ -29,7 +27,6 @@ import { YoutubeVideoEmbedDirective } from '../../directives/youtube-video-embed
 	styleUrl: "./post-details.component.scss",
 })
 export class PostDetailsComponent implements OnInit, OnDestroy {
-	sidenavOpen: boolean = false;
 	blogURL!: string;
 	blogInfo!: BlogInfo;
 	blogName: string = "";
@@ -55,10 +52,6 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 
 	toggleTheme(): void {
 		this.themeService.updateTheme();
-	}
-
-	toggleSidenav() {
-		this.sidenavOpen = !this.sidenavOpen;
 	}
 
 	ngOnDestroy(): void {
