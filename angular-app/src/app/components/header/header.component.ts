@@ -66,7 +66,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			});
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.showMainHeader = !this.route.snapshot.firstChild?.paramMap.has('slug');
+        this.showMainHeader = !this.route.snapshot.firstChild?.paramMap.has('postSlug');
       }
     });
 	}

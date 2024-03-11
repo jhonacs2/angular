@@ -37,7 +37,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 	private blogService = inject(BlogService);
 	private querySubscription?: Subscription;
 
-	@Input({ required: true }) slug!: string;
+	@Input({ required: true }) postSlug!: string;
 
 	ngOnInit(): void {
 		this.blogURL = this.blogService.getBlogURL();
@@ -47,7 +47,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 				this.blogInfo = data;
 				this.blogName = this.blogInfo.title;
 			});
-		this.post$ = this.blogService.getSinglePost(this.blogURL, this.slug);
+		this.post$ = this.blogService.getSinglePost(this.blogURL, this.postSlug);
 	}
 
 	toggleTheme(): void {
