@@ -14,14 +14,14 @@ export const routes: Routes = [
       },
 
       {
-        path: 'series/:slug',
+        path: ':slugSeries',
         loadComponent: () => import('./components/series/series.component')
           .then(c => c.SeriesComponent)
       }
     ]
   },
   {
-    path: 'post/:slug',
+    path: ':slug',
     component: PostDetailsComponent
   }
 ];
