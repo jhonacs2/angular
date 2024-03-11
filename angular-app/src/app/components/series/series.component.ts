@@ -20,18 +20,18 @@ export class SeriesComponent implements OnInit {
   isHiddenLoadMore: boolean = true;
   isActiveInfiniteScroll: boolean = false;
   route: ActivatedRoute = inject(ActivatedRoute);
-  slug: string = '';
+  slugSeries: string = '';
 
   ngOnInit(): void {
     this.blogURL = this.blogService.getBlogURL();
     this.route.params.subscribe(params => {
-      this.slug = params['slug'];
+      this.slugSeries = params['slugSeries'];
       this.loadPostsInSeries();
     });
   }
 
   private loadPostsInSeries():void{
-    this.blogService.getPostsInSeries(this.blogURL, this.slug).subscribe(blogInfo => {
+    this.blogService.getPostsInSeries(this.blogURL, this.slugSeries).subscribe(blogInfo => {
       this.paginationInfo = blogInfo.pagination;
       this.isHiddenLoadMore = !blogInfo.pagination.hasNextPage;
       this.postsInSeries = blogInfo.posts;
@@ -41,7 +41,7 @@ export class SeriesComponent implements OnInit {
   loadMorePostsFromSeries():void {
     if (!this.paginationInfo.hasNextPage) return;
     this.isHiddenLoadMore = true;
-    this.blogService.getPostsInSeries(this.blogURL, this.slug, this.paginationInfo.endCursor).pipe(
+    this.blogService.getPostsInSeries(this.blogURL, this.slugSeries, this.paginationInfo.endCursor).pipe(
     ).subscribe(newPosts => {
       this.isActiveInfiniteScroll = true;
       this.paginationInfo = newPosts.pagination;
