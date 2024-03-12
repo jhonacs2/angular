@@ -1,52 +1,4 @@
 .post-details-page {
-  .toolbar {
-    position: fixed;
-    width: 95vw;
-    padding: 1rem 2rem;
-    z-index: 2;
-
-    .toolbar-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      .toolbar-row-start {
-        display: flex;
-
-        .menu {
-          display: flex;
-          align-items: center;
-          margin-right: 0.7rem;
-          cursor: pointer;
-        }
-
-        .logo {
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-
-          h1 {
-            font-size: 1.3rem;
-            font-weight: 400;
-            margin: 0;
-          }
-        }
-      }
-      .toolbar-row-end {
-        .controls {
-          display: flex;
-          div {
-            padding: 0 0.2rem;
-          }
-          .theme-control {
-            display: flex;
-            align-items: center;
-          }
-        }
-      }
-    }
-  }
-
   article {
     margin: 0 auto;
     max-width: 50vw;
@@ -56,7 +8,6 @@
     .title {
       font-size: 1.7rem;
       font-weight: 500;
-      margin: 5rem 0 0.5rem;
     }
 
     .cover-image {

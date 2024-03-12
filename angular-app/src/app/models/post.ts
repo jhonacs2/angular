@@ -48,7 +48,7 @@ export interface Content {
   html: string;
 }
 
-export interface BlogPaginationInfo {
+export interface PostsPageInfo {
   posts: Post[];
   pagination: PageInfo;
 }

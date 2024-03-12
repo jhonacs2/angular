@@ -1,40 +1,5 @@
 <div class="post-details-page">
-  <div class="toolbar">
-    <div class="toolbar-row">
-      <div class="toolbar-row-start">
-        <div class="menu">
-          <span (click)="toggleSidenav()" class="material-symbols-outlined">
-            menu
-          </span>
-        </div>
-        <a routerLink="/" class="logo">
-          <h1>{{blogName}}</h1>
-        </a>
-      </div>
-      <div class="toolbar-row-end">
-        <div class="controls">
-          <div class="search">
-            <button><span class="material-symbols-outlined">
-                search
-              </span></button>
-          </div>
-          <div class="theme-control">
-            @if (themeService.themeSignal() == 'dark') {
-            <button (click)="toggleTheme()"><span class="material-symbols-outlined">
-                dark_mode
-              </span></button>
-            } @else {
-            <button (click)="toggleTheme()"><span class="material-symbols-outlined">
-                light_mode
-              </span></button>
-            }
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="content">
-    <app-sidenav [sidenavOpen]="sidenavOpen" [class.show]="sidenavOpen"></app-sidenav>
     @if (post$ | async; as post) {
     <article>
       <h1 class="title">{{ post.title }}</h1>
@@ -65,5 +30,4 @@
     </article>
     }
   </div>
-  <app-footer></app-footer>
 </div>

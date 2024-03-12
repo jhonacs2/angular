@@ -1,65 +1,88 @@
 <div class="toolbar" role="banner">
-  <div class="toolbar-row">
-    <a routerLink="/" class="logo">
-      <img src="{{blogImage}}" alt="logo" />
-      <h1>{{ blogName }}</h1>
-    </a>
-    <div class="controls">
-      <div class="search">
-        <button><span class="material-symbols-outlined">
-            search
-          </span></button>
+  <div class="toolbar-row first">
+    <div class="toolbar-row-start">
+      @if (showMainHeader) {
+      <a routerLink="/" class="blog-title">
+        <img class="logo-image" src="{{blogImage}}" alt="logo" />
+      </a>
+      } @else {
+      <div class="menu">
+        <span (click)="toggleSidenav()" class="material-symbols-outlined">
+          menu
+        </span>
       </div>
-      <div class="settings">
-        <button (click)="modalService.showSettingsDialog=true"><span class="material-symbols-outlined">
-            settings
-          </span></button>
-      </div>
-      <div class="theme-control">
-        @if (themeService.themeSignal() == 'dark') {
-          <button>
-            <span class="material-symbols-outlined" (click)="toggleTheme()">
+      }
+      <a routerLink="/" class="blog-title">
+        <h1>{{blogName}}</h1>
+      </a>
+    </div>
+    <div class="toolbar-row-end">
+      <div class="controls">
+        @if (showMainHeader) {
+        <div class="search">
+          <button><span class="material-symbols-outlined">
+              search
+            </span></button>
+        </div>
+        <div class="settings">
+          <button (click)="modalService.showSettingsDialog=true"><span class="material-symbols-outlined">
+              settings
+            </span></button>
+        </div>
+        }
+        <div class="theme-control">
+          @if (themeService.themeSignal() == 'dark') {
+          <button (click)="toggleTheme()"><span class="material-symbols-outlined">
               dark_mode
-            </span>
-          </button>
-        } @else {
-          <button>
-            <span class="material-symbols-outlined" (click)="toggleTheme()">
+            </span></button>
+          } @else {
+          <button (click)="toggleTheme()"><span class="material-symbols-outlined">
               light_mode
-            </span>
-          </button>
-        }
+            </span></button>
+          }
+        </div>
       </div>
     </div>
+  </div>
 
-  </div>
-  <div class="toolbar-row">
-    <div class="social">
-      <div class="social-link">
-        @for (social of blogSocialLinks | keyvalue; track social) {
-        @if (social.value) {
-        <a href="{{social.value}}" target="_blank" rel="noopener noreferrer">
-          <app-svg-icon [icon]="social.key"></app-svg-icon>
-        </a>
-        }
-        }
+  @if (showMainHeader) {
+  <div class="toolbar-row second">
+    <div class="toolbar-row-start">
+      <div class="social">
+        <div class="social-link">
+          @for (social of blogSocialLinks | keyvalue; track social) {
+          @if (social.value) {
+          <a href="{{social.value}}" target="_blank" rel="noopener noreferrer">
+            <app-svg-icon [icon]="social.key"></app-svg-icon>
+          </a>
+          }
+          }
+        </div>
       </div>
     </div>
-    <div class="follow">
-      <button (click)="modalService.showFollowDialog=true">Follow</button>
+    <div class="toolbar-row-end">
+      <div class="follow">
+        <button (click)="modalService.showFollowDialog=true">Follow</button>
+      </div>
     </div>
   </div>
-  <div class="toolbar-row">
+  <div class="toolbar-row third">
     <div class="series">
       @for (series of seriesList; track series) {
       <a [routerLink]="['series', series.slug]" class="series-link">{{ series.name}}</a>
       }
     </div>
   </div>
+  }
 </div>
+
 @if (modalService.showSettingsDialog) {
 <app-settings-dialog></app-settings-dialog>
 }
 @if (modalService.showFollowDialog) {
 <app-follow-dialog></app-follow-dialog>
+}
+
+@if (!showMainHeader) {
+<app-sidenav [sidenavOpen]="sidenavOpen" [class.show]="sidenavOpen"></app-sidenav>
 }
