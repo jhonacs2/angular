@@ -26,10 +26,10 @@ export class PostsComponent implements OnInit {
   }
 
   private loadPosts(): void {
-    this.blogService.getPosts(this.blogURL, this.paginationInfo.endCursor).subscribe(blogPaginationInfo => {
-      this.paginationInfo = blogPaginationInfo.pagination;
-      this.isHiddenLoadMore = !blogPaginationInfo.pagination.hasNextPage;
-      this.posts = blogPaginationInfo.posts;
+    this.blogService.getPosts(this.blogURL, this.paginationInfo.endCursor).subscribe(postsPageInfo => {
+      this.paginationInfo = postsPageInfo.pagination;
+      this.isHiddenLoadMore = !postsPageInfo.pagination.hasNextPage;
+      this.posts = postsPageInfo.posts;
     });
   }
 

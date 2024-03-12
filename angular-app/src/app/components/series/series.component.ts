@@ -31,10 +31,10 @@ export class SeriesComponent implements OnInit {
   }
 
   private loadPostsInSeries():void{
-    this.blogService.getPostsInSeries(this.blogURL, this.slug).subscribe(blogInfo => {
-      this.paginationInfo = blogInfo.pagination;
-      this.isHiddenLoadMore = !blogInfo.pagination.hasNextPage;
-      this.postsInSeries = blogInfo.posts;
+    this.blogService.getPostsInSeries(this.blogURL, this.slug).subscribe(seriesPageInfo => {
+      this.paginationInfo = seriesPageInfo.pagination;
+      this.isHiddenLoadMore = !seriesPageInfo.pagination.hasNextPage;
+      this.postsInSeries = seriesPageInfo.posts;
     })
   }
 
