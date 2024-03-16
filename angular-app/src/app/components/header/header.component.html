@@ -30,6 +30,13 @@
             </span></button>
         </div>
         }
+        @if (!showMainHeader) {
+          <div class="share">
+            <button (click)="modalService.showShareDialog=true"><span class="material-symbols-outlined">
+                share
+              </span></button>
+          </div>
+          }
         <div class="theme-control">
           @if (themeService.themeSignal() == 'dark') {
           <button (click)="toggleTheme()"><span class="material-symbols-outlined">
@@ -78,6 +85,9 @@
 
 @if (modalService.showSettingsDialog) {
 <app-settings-dialog></app-settings-dialog>
+}
+@if (modalService.showShareDialog) {
+<app-share-dialog></app-share-dialog>
 }
 @if (modalService.showFollowDialog) {
 <app-follow-dialog></app-follow-dialog>
