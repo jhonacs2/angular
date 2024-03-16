@@ -18,6 +18,7 @@ import { BlogInfo,  } from '../models/blog-info';
 export class BlogService {
   blogURL: string = "hashnode.anguhashblog.com";
   private readonly localStorageKey = 'userBlogURL';
+  defaultOgImageUrl = "/assets/images/angular-anguhashblog-dark.jpg";
 
   constructor(private apollo: Apollo) { }
 
@@ -119,7 +120,7 @@ export class BlogService {
     );
   }
 
-  private updateOgImageMetaTag(imageUrl: string): void {
+  updateOgImageMetaTag(imageUrl: string): void {
     const metaTag = document.querySelector('meta[property="og:image"]');
     const metaTagSecure = document.querySelector('meta[property="og:image:secure_url"]');
     if (metaTag) {
@@ -131,7 +132,10 @@ export class BlogService {
   }
 
   resetOgImageMetaTagToDefault(): void {
-    const defaultImageUrl = "/assets/images/angular-anguhashblog-dark.jpg";
-    this.updateOgImageMetaTag(defaultImageUrl);
+    this.updateOgImageMetaTag(this.defaultOgImageUrl);
+  }
+
+  resetOgImageMetaTagToNone(): void {
+    this.updateOgImageMetaTag('');
   }
 }
