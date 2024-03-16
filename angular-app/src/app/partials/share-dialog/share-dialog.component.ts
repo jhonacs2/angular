@@ -2,16 +2,19 @@ import { Component, OnInit, inject } from "@angular/core";
 import { BlogService } from "../../services/blog.service";
 import { ModalService } from "../../services/modal.service";
 import { from, timer } from "rxjs";
+import { SvgIconComponent } from "../svg-icon/svg-icon.component";
 
 @Component({
 	selector: "app-share-dialog",
 	standalone: true,
-	imports: [],
+	imports: [SvgIconComponent],
 	templateUrl: "./share-dialog.component.html",
 	styleUrl: "./share-dialog.component.scss",
 })
 export class ShareDialogComponent implements OnInit {
 	currentUrl: string = "";
+  linkedinIcon: string = "linkedin";
+  twitterIcon: string = "twitter";
 	modalService: ModalService = inject(ModalService);
 	blogService: BlogService = inject(BlogService);
 
@@ -25,7 +28,7 @@ export class ShareDialogComponent implements OnInit {
 		).subscribe({
 			next: () => {
         const buttonElement = document.querySelector(".copy-btn") as HTMLButtonElement;
-				buttonElement.textContent = "Post Link Copied ✅";
+				buttonElement.textContent = "✅ Post Link Copied";
 				timer(1500).subscribe(() => (buttonElement.textContent = "Copy Post Link"));
 			},
 			error: (err: any) => console.error('Failed to copy: ', err),
