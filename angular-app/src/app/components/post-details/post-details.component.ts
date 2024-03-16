@@ -54,7 +54,15 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 		this.themeService.updateTheme();
 	}
 
+  private updateOgImageMetaTag(imageUrl: string): void {
+    const metaTag = document.querySelector('meta[property="og:image"]');
+    if (metaTag) {
+      metaTag.setAttribute('content', imageUrl);
+    }
+  }
+
 	ngOnDestroy(): void {
 		this.querySubscription?.unsubscribe();
+    this.blogService.resetOgImageMetaTagToDefault();
 	}
 }

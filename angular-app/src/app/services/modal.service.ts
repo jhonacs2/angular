@@ -5,5 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class ModalService {
   showSettingsDialog = false;
+  showShareDialog = false;
   showFollowDialog = false;
 }

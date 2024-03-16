@@ -110,6 +110,28 @@ export class BlogService {
         slug: slug
       },
     })
-    .valueChanges.pipe(map(({ data }) => data.publication.post));
+    .valueChanges.pipe(
+      map(({ data }) => {
+        const post = data.publication.post;
+        this.updateOgImageMetaTag(post.coverImage.url); // Update og:image meta tag
+        return post;
+      })
+    );
+  }
+
+  private updateOgImageMetaTag(imageUrl: string): void {
+    const metaTag = document.querySelector('meta[property="og:image"]');
+    const metaTagSecure = document.querySelector('meta[property="og:image:secure_url"]');
+    if (metaTag) {
+      metaTag.setAttribute('content', imageUrl);
+    }
+    if (metaTagSecure) {
+      metaTagSecure.setAttribute('content', imageUrl);
+    }
+  }
+
+  resetOgImageMetaTagToDefault(): void {
+    const defaultImageUrl = "/assets/images/angular-anguhashblog-dark.jpg";
+    this.updateOgImageMetaTag(defaultImageUrl);
   }
 }

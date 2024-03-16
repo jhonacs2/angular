@@ -4,7 +4,12 @@ import { Subscription } from "rxjs";
 import { BlogService } from "../../services/blog.service";
 import { AsyncPipe, KeyValuePipe } from "@angular/common";
 import { BlogInfo, BlogLinks } from "../../models/blog-info";
-import { ActivatedRoute, NavigationEnd, Router, RouterLink } from "@angular/router";
+import {
+	ActivatedRoute,
+	NavigationEnd,
+	Router,
+	RouterLink,
+} from "@angular/router";
 import { SeriesList } from "../../models/post";
 import { FollowDialogComponent } from "../../partials/follow-dialog/follow-dialog.component";
 import { SidenavComponent } from "../sidenav/sidenav.component";
@@ -12,18 +17,28 @@ import { ModalService } from "../../services/modal.service";
 import { IconService } from "../../services/icon.service";
 import { SvgIconComponent } from "../../partials/svg-icon/svg-icon.component";
 import { SettingsDialogComponent } from "../../partials/settings-dialog/settings-dialog.component";
+import { ShareDialogComponent } from "../../partials/share-dialog/share-dialog.component";
 
 @Component({
 	selector: "app-header",
 	standalone: true,
-	imports: [KeyValuePipe, AsyncPipe, RouterLink, SidenavComponent, FollowDialogComponent, SvgIconComponent, SettingsDialogComponent],
+	imports: [
+		KeyValuePipe,
+		AsyncPipe,
+		RouterLink,
+		SidenavComponent,
+		FollowDialogComponent,
+		SvgIconComponent,
+		SettingsDialogComponent,
+		ShareDialogComponent,
+	],
 	templateUrl: "./header.component.html",
 	styleUrl: "./header.component.scss",
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  showMainHeader: boolean = true;
-  sidenavOpen: boolean = false;
-  blogURL!: string;
+	showMainHeader: boolean = true;
+	sidenavOpen: boolean = false;
+	blogURL!: string;
 	blogInfo!: BlogInfo;
 	blogName: string = "";
 	// start with default image to prevent 404 when returning from post-details page
@@ -33,13 +48,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	themeService: ThemeService = inject(ThemeService);
 	blogService: BlogService = inject(BlogService);
 	modalService: ModalService = inject(ModalService);
-  iconService: IconService = inject(IconService);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
+	iconService: IconService = inject(IconService);
+	private route = inject(ActivatedRoute);
+	private router = inject(Router);
 	private querySubscription?: Subscription;
 
 	ngOnInit(): void {
-    this.blogURL = this.blogService.getBlogURL();
+		this.blogURL = this.blogService.getBlogURL();
 		this.querySubscription = this.blogService
 			.getBlogInfo(this.blogURL)
 			.subscribe((data) => {
@@ -64,24 +79,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			.subscribe((data) => {
 				this.seriesList = data;
 			});
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.showMainHeader = !this.route.snapshot.firstChild?.paramMap.has('postSlug');
-      }
-    });
+		this.router.events.subscribe((event) => {
+			if (event instanceof NavigationEnd) {
+				this.showMainHeader =
+					!this.route.snapshot.firstChild?.paramMap.has("postSlug");
+			}
+		});
 	}
 
 	toggleTheme(): void {
 		this.themeService.updateTheme();
 	}
 
-  toggleSidenav() {
+	toggleSidenav() {
 		this.sidenavOpen = !this.sidenavOpen;
 	}
 
-  getIcon(key: string) {
-    return this.iconService.getIcon(key);
-  }
+	getIcon(key: string) {
+		return this.iconService.getIcon(key);
+	}
 
 	ngOnDestroy(): void {
 		this.querySubscription?.unsubscribe();

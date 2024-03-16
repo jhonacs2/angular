@@ -1,0 +1,20 @@
+<div class="overlay" (click)="modalService.showShareDialog=false"></div>
+<div class="dialog-container">
+  <div class="close">
+    <span class="material-symbols-outlined close-btn" (click)="modalService.showShareDialog=false">
+      close
+      </span>
+  </div>
+  <div class="dialog-header">
+    <h3>Share this Blog Post:</h3>
+  </div>
+  <div class="dialog-content">
+  </div>
+  <div class="dialog-actions">
+    <button class="copy-btn" (click)="copyPostURL()">Copy Post Link</button>
+    <button class="linkedin-btn" (click)="shareOnLinkedIn()"><app-svg-icon [icon]="linkedinIcon"></app-svg-icon>Share on LinkedIn</button>
+    <button class="twitter-btn" (click)="shareOnTwitter()"><app-svg-icon [icon]="twitterIcon"></app-svg-icon>Share on Twitter</button>
+  </div>
+</div>
+
+
