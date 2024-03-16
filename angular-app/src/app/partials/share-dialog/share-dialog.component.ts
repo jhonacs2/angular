@@ -31,4 +31,14 @@ export class ShareDialogComponent implements OnInit {
 			error: (err: any) => console.error('Failed to copy: ', err),
 		});
 	}
+
+  shareOnLinkedIn(): void {
+    const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(this.currentUrl)}`;
+    window.open(linkedinShareUrl, '_blank');
+  }
+
+  shareOnTwitter(): void {
+    const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(this.currentUrl)}`;
+    window.open(twitterShareUrl, '_blank');
+  }
 }
