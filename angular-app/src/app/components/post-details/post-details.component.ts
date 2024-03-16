@@ -31,7 +31,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 	blogInfo!: BlogInfo;
 	blogName: string = "";
 	post$!: Observable<Post>;
-  modifiedPost!: Post;
+  postCoverImage!: string;
 	themeService: ThemeService = inject(ThemeService);
 	route: ActivatedRoute = inject(ActivatedRoute);
 	private blogService = inject(BlogService);
@@ -48,18 +48,15 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 				this.blogName = this.blogInfo.title;
 			});
 		this.post$ = this.blogService.getSinglePost(this.blogURL, this.postSlug);
+    this.post$.subscribe((post) => {
+      this.postCoverImage = post.coverImage.url;
+      this.blogService.updateOgImageMetaTag(this.postCoverImage);
+    });
 	}
 
 	toggleTheme(): void {
 		this.themeService.updateTheme();
 	}
-
-  private updateOgImageMetaTag(imageUrl: string): void {
-    const metaTag = document.querySelector('meta[property="og:image"]');
-    if (metaTag) {
-      metaTag.setAttribute('content', imageUrl);
-    }
-  }
 
 	ngOnDestroy(): void {
 		this.querySubscription?.unsubscribe();

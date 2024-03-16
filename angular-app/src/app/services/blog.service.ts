@@ -119,7 +119,7 @@ export class BlogService {
     );
   }
 
-  private updateOgImageMetaTag(imageUrl: string): void {
+  updateOgImageMetaTag(imageUrl: string): void {
     const metaTag = document.querySelector('meta[property="og:image"]');
     const metaTagSecure = document.querySelector('meta[property="og:image:secure_url"]');
     if (metaTag) {
