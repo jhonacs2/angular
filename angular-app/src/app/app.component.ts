@@ -7,6 +7,7 @@ import { ThemeService } from "./services/theme.service";
 import { BlogInfo } from "./models/blog-info";
 import { Subscription } from "rxjs";
 import { BlogService } from "./services/blog.service";
+import { Meta } from "@angular/platform-browser";
 
 @Component({
 	selector: "app-root",
@@ -16,12 +17,13 @@ import { BlogService } from "./services/blog.service";
 	styleUrl: "./app.component.scss",
 })
 export class AppComponent implements OnInit, OnDestroy {
-	title = "angular-app";
+	// title = "angular-app";
   blogURL!: string;
 	blogInfo!: BlogInfo;
 	siteFavicon: any;
 	themeService: ThemeService = inject(ThemeService);
 	blogService: BlogService = inject(BlogService);
+  private meta: Meta = inject(Meta);
 	private querySubscription?: Subscription;
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
@@ -48,7 +50,16 @@ export class AppComponent implements OnInit, OnDestroy {
 					});
 				}
 			});
+
+      this.meta.addTags([
+        { name: 'description', property: "og:description",  content: 'Angular Template for Hashnode Blogs' },
+        { name: 'image', property: "og:image", content: './assets/angular-anguhashblog-dark.jpg' },
+        { charset: 'UTF-8' }
+      ]);
 	}
+
+
+
 	ngOnDestroy(): void {
 		this.querySubscription?.unsubscribe();
 	}
