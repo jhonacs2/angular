@@ -53,7 +53,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
       this.meta.addTags([
         { name: 'description', property: "og:description",  content: 'Angular Template for Hashnode Blogs' },
-        { name: 'image', property: "og:image", content: './assets/angular-anguhashblog-dark.jpg' },
+        { name: 'image', property: "og:image", content: '/assets/angular-anguhashblog-dark.jpg' },
         { charset: 'UTF-8' }
       ]);
 	}

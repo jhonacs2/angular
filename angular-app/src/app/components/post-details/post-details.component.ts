@@ -52,7 +52,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 		this.post$ = this.blogService.getSinglePost(this.blogURL, this.postSlug);
 
     this.meta.updateTag({ name: 'description', content: 'This is a blog post' });
-    this.meta.updateTag({ name: 'image', content: './assets/anguhashblog-logo-purple-bgr.jpg' });
+    this.meta.updateTag({ name: 'image', content: '/assets/anguhashblog-logo-purple-bgr.jpg' });
 
 	}
 
@@ -63,6 +63,6 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 	ngOnDestroy(): void {
 		this.querySubscription?.unsubscribe();
     this.meta.updateTag({ name: 'description', content: 'Angular Template for Hashnode Blogs' });
-    this.meta.updateTag({ name: 'image', content: './assets/angular-anguhashblog-dark.jpg' });
+    this.meta.updateTag({ name: 'image', content: '/assets/angular-anguhashblog-dark.jpg' });
 	}
 }
