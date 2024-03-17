@@ -48,10 +48,6 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 				this.blogName = this.blogInfo.title;
 			});
 		this.post$ = this.blogService.getSinglePost(this.blogURL, this.postSlug);
-    this.post$.subscribe((post) => {
-      this.postCoverImage = post.coverImage.url;
-      this.blogService.updateOgImageMetaTag(this.postCoverImage);
-    });
 	}
 
 	toggleTheme(): void {
@@ -60,6 +56,5 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 
 	ngOnDestroy(): void {
 		this.querySubscription?.unsubscribe();
-    this.blogService.resetOgImageMetaTagToDefault();
 	}
 }

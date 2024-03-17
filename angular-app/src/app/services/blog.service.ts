@@ -9,7 +9,7 @@ import {
   GET_SERIES_LIST,
   GET_SINGLE_POST
 } from '../graphql.operations';
-import { Author, Post, PostsPageInfo, SeriesList } from '../models/post';
+import { Author, Post, PostsWithPageInfo, SeriesList } from '../models/post';
 import { BlogInfo,  } from '../models/blog-info';
 
 @Injectable({
@@ -54,7 +54,7 @@ export class BlogService {
     .valueChanges.pipe(map(({ data }) => data.publication.author));
   }
 
-  getPosts(host: string, after: string): Observable<PostsPageInfo> {
+  getPosts(host: string, after: string): Observable<PostsWithPageInfo> {
     return this.apollo
       .watchQuery<any>({
         query: GET_POSTS,
@@ -82,7 +82,7 @@ export class BlogService {
     .valueChanges.pipe(map(({ data }) => data.publication.seriesList.edges.map((edge: { node: any; }) => edge.node)));
   }
 
-  getPostsInSeries(host: string, slug: string, after: string = ""): Observable<PostsPageInfo> {
+  getPostsInSeries(host: string, slug: string, after: string = ""): Observable<PostsWithPageInfo> {
     return this.apollo
     .watchQuery<any>({
       query: GET_POSTS_IN_SERIES,

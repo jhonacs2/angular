@@ -15,5 +15,10 @@ export const routes: Routes = [
   {
     path: ':postSlug',
     component: PostDetailsComponent
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 ];

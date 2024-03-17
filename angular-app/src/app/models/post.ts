@@ -48,7 +48,7 @@ export interface Content {
   html: string;
 }
 
-export interface PostsPageInfo {
+export interface PostsWithPageInfo {
   posts: Post[];
   pagination: PageInfo;
 }
