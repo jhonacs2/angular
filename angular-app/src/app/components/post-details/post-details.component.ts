@@ -10,6 +10,7 @@ import { ThemeService } from '../../services/theme.service';
 import { FooterComponent } from '../footer/footer.component';
 import { BlogInfo } from '../../models/blog-info';
 import { YoutubeVideoEmbedDirective } from '../../directives/youtube-video-embed.directive';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
 	selector: "app-post-details",
@@ -35,6 +36,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 	themeService: ThemeService = inject(ThemeService);
 	route: ActivatedRoute = inject(ActivatedRoute);
 	private blogService = inject(BlogService);
+  private meta: Meta = inject(Meta);
 	private querySubscription?: Subscription;
 
 	@Input({ required: true }) postSlug!: string;
@@ -48,6 +50,10 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 				this.blogName = this.blogInfo.title;
 			});
 		this.post$ = this.blogService.getSinglePost(this.blogURL, this.postSlug);
+
+    this.meta.updateTag({ name: 'description', content: 'This is a blog post' });
+    this.meta.updateTag({ name: 'image', content: './assets/anguhashblog-logo-purple-bgr.jpg' });
+
 	}
 
 	toggleTheme(): void {
@@ -56,5 +62,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 
 	ngOnDestroy(): void {
 		this.querySubscription?.unsubscribe();
+    this.meta.updateTag({ name: 'description', content: 'Angular Template for Hashnode Blogs' });
+    this.meta.updateTag({ name: 'image', content: './assets/angular-anguhashblog-dark.jpg' });
 	}
 }
