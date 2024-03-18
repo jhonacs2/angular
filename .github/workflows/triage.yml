@@ -18,4 +18,4 @@ jobs:
           issueCurrentlyAssignedMessage: Thanks for being interested in this issue. It looks like this ticket is already assigned to a contributor.
           token: ${{ secrets.ACCESS_TOKEN }}
           blockingLabels: 👀 needs triage,blocked,core team work,needs design,duplicate
-          blockingLabelsMessage: The issue you are trying to assign yourself is blocked until it can be triaged or by another label on the issue.
+          blockingLabelsMessage: The issue you are trying to assign yourself is blocked either by the 'needs triage' label, or by another label on the issue. Please wait until the issue is unblocked before assigning yourself.
