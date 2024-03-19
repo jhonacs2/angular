@@ -47,6 +47,7 @@
         }
       }
     }
+
   }
 
   .load-more-posts {
@@ -55,6 +56,16 @@
     button {
       font-size: 1rem;
       text-transform: uppercase;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+    margin: 0.5rem 0;
+    .card-title{
+      height: auto;
     }
   }
 }

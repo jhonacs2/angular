@@ -93,4 +93,25 @@
       }
     }
   }
+
+}
+
+@media (max-width: 767px) {
+  .toolbar-row {
+    flex-direction: column;
+    padding-bottom: 12px;
+
+    .toolbar-row-start,
+    .toolbar-row-end {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-items: center;
+    }
+    .series{
+      flex-direction: column;
+      align-items: center;
+    }
+  }
 }
