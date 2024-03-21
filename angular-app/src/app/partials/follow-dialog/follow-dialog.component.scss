@@ -97,8 +97,8 @@
 
 @media (max-width: 600px) {
   .dialog-container {
-    width: 70vw;
-    height: 60vh;
+    width: 80vw;
+    height: 70vh;
 
     .dialog-content {
       h3 {
@@ -116,6 +116,7 @@
     .dialog-actions {
       button {
         align-items: center;
+        justify-content: center;
         font-size: 1.2rem;
         height: 3.5rem;
       }
