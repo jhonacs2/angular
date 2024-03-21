@@ -59,3 +59,23 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .series-view {
+    width: 90vw;
+    .cards-wrapper {
+      .card {
+        width: 100%;
+        margin: 0.5rem 0;
+        .card-image{
+          min-height: 14rem;
+        }
+        .card-title {
+          h3 {
+            font-size: 1.3rem;
+          }
+        }
+      }
+    }
+  }
+}
