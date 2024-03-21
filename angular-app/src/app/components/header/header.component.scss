@@ -1,7 +1,7 @@
 .toolbar {
   position: relative;
   padding: 1rem;
-  z-index: 1;
+  z-index: 3;
 
   .toolbar-row {
     display: flex;
@@ -96,22 +96,54 @@
 
 }
 
-@media (max-width: 767px) {
-  .toolbar-row {
-    flex-direction: column;
-    padding-bottom: 12px;
+@media (max-width: 600px) {
+  .toolbar {
+    padding: 0 1rem;
+    .toolbar-row {
+      button {
+        span {
+          font-size: 2rem;
+        }
+      }
 
-    .toolbar-row-start,
-    .toolbar-row-end {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      align-items: center;
+      &.second {
+        flex-direction: column;
+      }
+
+      .toolbar-row-start {
+        .menu {
+          padding: 0 1rem;
+          span {
+            font-size: 2.3rem;
+          }
+        }
+
+        .blog-title {
+          margin: 1.2rem 0;
+
+          h1 {
+            font-size: 1.8rem;
+          }
+        }
+      }
+
+      .toolbar-row-end {
+        .follow {
+          margin: 1rem 0;
+          button {
+            padding: 0.7rem 1.5rem;
+            font-size: 1.3rem;
+          }
+        }
+      }
     }
-    .series{
+
+    // will have to be adjusted to a dropdown
+    // to handle cases where there are more than 3 series
+    .series {
       flex-direction: column;
       align-items: center;
+      margin-bottom: 0.8rem;
     }
   }
 }

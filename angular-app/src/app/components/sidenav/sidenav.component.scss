@@ -38,6 +38,7 @@
           flex-wrap: wrap;
           align-items: center;
           justify-content: center;
+
           a {
             margin: 0 0.2rem;
           }
@@ -48,5 +49,30 @@
 
   .sidenav-menu {
     display: none;
+  }
+}
+
+@media (max-width: 600px) {
+
+  :host {
+
+    &.show {
+
+      .sidenav-menu {
+        .series {
+          h3 {
+            font-size: 1.3rem;
+          }
+          .series-link {
+            font-size: 1.2rem;
+            line-height: 2rem;
+          }
+        }
+
+        .social {
+          width: 90%;
+        }
+      }
+    }
   }
 }
