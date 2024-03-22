@@ -1,18 +1,16 @@
 <div class="toolbar" role="banner">
   <div class="toolbar-row first">
     <div class="toolbar-row-start">
-      @if (showMainHeader) {
       <a routerLink="/" class="blog-title">
+        @if (showMainHeader) {
         <img class="logo-image" src="{{blogImage}}" alt="logo" />
-      </a>
-      } @else {
-      <div class="menu">
-        <span (click)="toggleSidenav()" class="material-symbols-outlined">
-          menu
-        </span>
-      </div>
-      }
-      <a routerLink="/" class="blog-title">
+        } @else {
+        <div class="menu">
+          <span (click)="toggleSidenav()" class="material-symbols-outlined">
+            menu
+          </span>
+        </div>
+        }
         <h1>{{blogName}}</h1>
       </a>
     </div>
@@ -31,12 +29,12 @@
         </div>
         }
         @if (!showMainHeader) {
-          <div class="share">
-            <button (click)="modalService.showShareDialog=true"><span class="material-symbols-outlined">
-                share
-              </span></button>
-          </div>
-          }
+        <div class="share">
+          <button (click)="modalService.showShareDialog=true"><span class="material-symbols-outlined">
+              share
+            </span></button>
+        </div>
+        }
         <div class="theme-control">
           @if (themeService.themeSignal() == 'dark') {
           <button (click)="toggleTheme()"><span class="material-symbols-outlined">
