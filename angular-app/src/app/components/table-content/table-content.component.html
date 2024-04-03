@@ -1,0 +1,35 @@
+<section class="table-content" style="max-height: 600px;overflow: hidden">
+  <h2>Table Of Content</h2>
+
+  <ul>
+    <ng-container *ngFor="let item of data">
+      <details>
+        <summary>{{ item.label }}</summary>
+
+        <ng-container *ngIf="item.children">
+          <ul>
+            <ng-container *ngFor="let child of item.children">
+              <li>{{ child.label }}</li>
+              <ng-container *ngIf="child.children">
+                <ng-template [ngTemplateOutlet]="recursiveList"
+                             [ngTemplateOutletContext]="{ $implicit: child.children }"></ng-template>
+              </ng-container>
+            </ng-container>
+          </ul>
+        </ng-container>
+      </details>
+    </ng-container>
+  </ul>
+
+  <ng-template #recursiveList let-children>
+    <ul>
+      <ng-container *ngFor="let child of children">
+        <li>{{ child.label }}</li>
+        <ng-container *ngIf="child.children">
+          <ng-template [ngTemplateOutlet]="recursiveList"
+                       [ngTemplateOutletContext]="{ $implicit: child.children }"></ng-template>
+        </ng-container>
+      </ng-container>
+    </ul>
+  </ng-template>
+</section>

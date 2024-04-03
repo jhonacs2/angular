@@ -147,6 +147,18 @@ export const GET_SINGLE_POST = gql`
 					html
 				}
 				publishedAt
+        features {
+          tableOfContents {
+            isEnabled
+            items {
+              id,
+              level
+              slug
+              title
+              parentId
+            }
+          }
+        }
 			}
 		}
 	}

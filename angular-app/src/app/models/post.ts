@@ -8,6 +8,7 @@ export type Post = {
   coverImage: CoverImage;
   content: Content;
   publishedAt: string;
+  features:Features
 };
 
 export interface SeriesList {
@@ -56,4 +57,25 @@ export interface PostsWithPageInfo {
 export interface PageInfo {
   hasNextPage: boolean;
   endCursor: string;
+}
+
+export interface Features {
+  tableOfContents: TableOfContents;
+}
+
+export interface TableOfContents {
+  isEnabled: boolean;
+  items:     Item[];
+}
+
+export interface Item {
+  id:         string;
+  level:      number;
+  slug:       string;
+  title:      string;
+  parentId:   null | string;
+}
+
+export enum Typename {
+  TableOfContentsItem = "TableOfContentsItem",
 }
