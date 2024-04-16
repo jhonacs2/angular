@@ -54,17 +54,20 @@
 
     input {
       font-size: 1rem;
-      width: 100%;
+      min-width: 16;
       padding: 0.5rem 0.2rem;
       margin: 1rem 0 0.5rem;
       border-radius: 0.3rem;
+    }
+
+    .error {
+      height: 1.5rem;
     }
 
     .dialog-content-wrapper {
       text-align: center;
       padding: 2rem 0;
     }
-
   }
 
   .dialog-actions {
@@ -100,7 +103,13 @@
         font-size: 1.2rem;
       }
       small {
-        font-size: 1rem;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+
+      .error {
+        text-align: center;
+        margin-bottom: 1rem;
       }
     }
 

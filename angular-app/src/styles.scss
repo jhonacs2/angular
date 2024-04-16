@@ -161,6 +161,12 @@ article {
     }
   }
 
+  .error {
+    small {
+      color: #d13c3c;
+    }
+  }
+
   footer {
     a {
       color: #a7a7a7;
@@ -230,6 +236,12 @@ article {
     pre {
       background-color: #444;
       color: #eaeaea;
+    }
+  }
+
+  .error {
+    small {
+      color: #bd4747;
     }
   }
 
