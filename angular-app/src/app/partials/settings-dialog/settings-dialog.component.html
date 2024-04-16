@@ -8,10 +8,9 @@
   <div class="dialog-content">
     @if (blogURLChanged) {
     <div class="dialog-content-wrapper">
-      <p>Blog URL changed and set in local storage</p>
-      <p>Reload the page to see your content loading</p>
-      <p>When resetting you may need to click on</p>
-      <p>the logo image to load the content again</p>
+      <p>Blog URL was changed</p>
+      <p>You are seeing blog posts from the following blog:</p>
+      <h3>{{blogURL}}</h3>
       <div class="dialog-actions">
         <button (click)="resetBlogURL()">Reset</button>
       </div>
@@ -20,8 +19,15 @@
     <h3>Try with your Blog</h3>
     <p>try AnguHashBlog</p>
     <small>with another Hashnode blog </small>
-    <input type="text" placeholder="Type a Blog URL..." [(ngModel)]="newBlogURL">
-    <small>must be an existing Hashnode Blog</small>
+    <input type="text" placeholder="Type a Blog URL..." [(ngModel)]="newBlogInput">
+    <div class="error">
+      @if (emptyInput) {
+      <small>Please provide a valid Hashnode Blog URL.</small>
+      }
+      @if (noBlogFound) {
+      <small>No Hashnode Blog found.</small>
+      }
+    </div>
     <div class="dialog-actions">
       <button (click)="changeBlogURL()">Change</button>
     </div>
