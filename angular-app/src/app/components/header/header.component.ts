@@ -18,6 +18,7 @@ import { IconService } from "../../services/icon.service";
 import { SvgIconComponent } from "../../partials/svg-icon/svg-icon.component";
 import { SettingsDialogComponent } from "../../partials/settings-dialog/settings-dialog.component";
 import { ShareDialogComponent } from "../../partials/share-dialog/share-dialog.component";
+import { ThemeSwitcherComponent } from "../../partials/theme-switcher/theme-switcher.component";
 
 @Component({
 	selector: "app-header",
@@ -26,6 +27,7 @@ import { ShareDialogComponent } from "../../partials/share-dialog/share-dialog.c
 		KeyValuePipe,
 		AsyncPipe,
 		RouterLink,
+		ThemeSwitcherComponent,
 		SidenavComponent,
 		FollowDialogComponent,
 		SvgIconComponent,
@@ -87,9 +89,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	toggleTheme(): void {
-		this.themeService.updateTheme();
-	}
+	// toggleTheme(): void {
+	// 	this.themeService.updateTheme();
+	// }
 
 	toggleSidenav() {
 		this.sidenavOpen = !this.sidenavOpen;
