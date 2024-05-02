@@ -27,6 +27,9 @@
       @if (noBlogFound) {
       <small>No Hashnode Blog found.</small>
       }
+      @if (invalidInput) {
+      <small>Invalid input, please try again.</small>
+      }
     </div>
     <div class="dialog-actions">
       <button (click)="changeBlogURL()">Change</button>
