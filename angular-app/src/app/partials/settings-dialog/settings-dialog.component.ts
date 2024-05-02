@@ -17,6 +17,7 @@ export class SettingsDialogComponent implements OnInit {
 	blogURLChanged: boolean = false;
 	noBlogFound: boolean = false;
 	emptyInput: boolean = false;
+	invalidInput: boolean = false;
 	modalService: ModalService = inject(ModalService);
 	blogService: BlogService = inject(BlogService);
 
@@ -35,37 +36,37 @@ export class SettingsDialogComponent implements OnInit {
 		if (this.newBlogInput === "") {
 			this.emptyInput = true;
 			return;
-		} else if (
-			this.newBlogInput.includes("https://") ||
-			this.newBlogInput.endsWith("/")
-		) {
-			const cleanedBlogURL = this.newBlogInput.split("https://")[1];
-			this.newBlogURL = cleanedBlogURL.split("/")[0];
+		} else if ( this.newBlogInput !== "") {
+      this.emptyInput = false;
+
+      if (this.newBlogInput.includes("https://") ||this.newBlogInput.endsWith("/")) {
+        const cleanedBlogURL = this.newBlogInput.split("https://")[1];
+        this.newBlogURL = cleanedBlogURL.split("/")[0];
+
+      } else {
+        this.newBlogURL = this.newBlogInput;
+      }
 
 			this.blogService.getBlogInfo(this.newBlogURL).subscribe((blogInfo) => {
 				if (blogInfo === null) {
 					this.noBlogFound = true;
-					this.emptyInput = false;
 					this.blogURLChanged = false;
 					this.newBlogInput = "";
 				} else {
 					this.blogService.setBlogURL(this.newBlogURL);
 					this.blogURL = this.blogService.getBlogURL();
-					this.emptyInput = false;
-
-					if (this.blogURL === "hashnode.anguhashblog.com") {
-						this.blogURLChanged = false;
-					} else {
-						this.blogURLChanged = true;
-						this.modalService.showSettingsDialog = false;
-						window.location.reload();
-					}
+          this.blogURLChanged = true;
+          this.modalService.showSettingsDialog = false;
+		      window.location.reload();
 				}
 			});
-		} else {
+		} else if (this.blogURL === "hashnode.anguhashblog.com") {
+      this.blogURLChanged = false;
+    } else {
 			this.noBlogFound = true;
 			this.emptyInput = false;
 			this.blogURLChanged = false;
+      this.invalidInput = true;
 			this.newBlogInput = "";
 		}
 	}
