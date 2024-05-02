@@ -1,0 +1,28 @@
+.theme-switcher {
+  display: grid;
+  height: 1.8rem;
+  width: 3rem;
+  border-radius: 1.3rem;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.6rem;
+    width: 1.6rem;
+    margin: 0.1rem;
+    border-radius: 50%;
+
+    &.dark-mode {
+      justify-self: flex-end;
+    }
+
+    &.light-mode {
+      justify-self: flex-start;
+    }
+
+    span {
+      font-size: 1rem;
+    }
+  }
+}
