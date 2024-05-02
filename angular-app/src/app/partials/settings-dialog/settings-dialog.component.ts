@@ -39,7 +39,7 @@ export class SettingsDialogComponent implements OnInit {
 		} else if ( this.newBlogInput !== "") {
       this.emptyInput = false;
 
-      if (this.newBlogInput.includes("https://") ||this.newBlogInput.endsWith("/")) {
+      if (this.newBlogInput.includes("https://") || this.newBlogInput.endsWith("/")) {
         const cleanedBlogURL = this.newBlogInput.split("https://")[1];
         this.newBlogURL = cleanedBlogURL.split("/")[0];
 
